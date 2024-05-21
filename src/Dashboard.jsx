@@ -7,7 +7,7 @@ import { MdAssignment } from "react-icons/md";
 import KPI from "./components/KPI";
 import Companies from "./pages/Companies";
 import Projects from "./pages/Projects";
-import ProjectCard from "./components/ProjectNames";
+import ProjectCard from "./components/ProjectCard";
 
 const Dashboard = () => {
   //   console.log(State.getStatesOfCountry("IN"));
@@ -45,6 +45,7 @@ const Dashboard = () => {
   //     .then((res) => console.log(res.data.project))
   //     .catch((e) => console.error(e));
   // }, [pId]);
+  
 
   return (
     <>
@@ -52,6 +53,7 @@ const Dashboard = () => {
         <KPI />
         {/* <Companies /> */}
         <Projects />
+        {/* <ProjectCard {...data} /> */}
 
         {/* <div className="bg-red-200 container">aa</div> */}
       </div>
