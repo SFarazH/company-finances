@@ -1,0 +1,9 @@
+[
+  { "id": 1, "heading": "Dashboard" },
+  { "id": 2, "heading": "Clients" },
+  { "id": 3, "heading": "Sales" },
+  { "id": 4, "heading": "Projects" },
+  { "id": 5, "heading": "Purchases" },
+  { "id": 6, "heading": "Payments" },
+  { "id": 7, "heading": "Clients" }
+]
