@@ -46,7 +46,7 @@ export default function CompanyCard(props) {
   };
   return (
     <>
-      <div className="mt-4 border rounded-lg p-4">
+      <div className=" border rounded-lg p-4">
         <p className="text-xl font-bold">{props.companyName}</p>
         <div className="flex">
           <div className="w-3/4">

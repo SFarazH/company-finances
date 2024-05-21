@@ -21,17 +21,18 @@ export default function Companies() {
   return (
     <>
       <div>
-        <p className="text-2xl font-semibold">Companies</p>
+        <p className="text-2xl font-semibold mb-4 ">Companies</p>
         {clientName.map((client) => (
-          <div key={client._id}>
+          <div key={client._id} className="my-2">
             <div
-              className="border p-2 text-lg cursor-pointer"
+              className="border p-3 rounded-full text-xl cursor-pointer flex justify-between"
               onClick={() => toggleAccordion(client._id)}
             >
               {client.companyName}
+              <p>fff</p>
             </div>
             {expandedCompany === client._id && (
-              <div className="p-2">
+              <div className="px-4 py-2">
                 <CompanyCard {...client} key={client._id} />
               </div>
             )}

@@ -6,12 +6,12 @@ import { Route, Routes } from "react-router-dom";
 
 function App() {
   return (
-    <>  
-    <div className="grid grid-cols-[auto_1fr] overflow-hidden">
-      <SideMenu />
-      <Dashboard />
-      
-    </div></>
+    <>
+      <div className="grid grid-cols-[auto_1fr] overflow-hidden">
+        <SideMenu />
+        <Dashboard />
+      </div>
+    </>
   );
 }
 
