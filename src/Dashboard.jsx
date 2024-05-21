@@ -5,7 +5,7 @@ import InsightCard from "./components/InsightsCard";
 import { FaRupeeSign, FaBuilding, FaShoppingCart } from "react-icons/fa";
 import { MdAssignment } from "react-icons/md";
 import KPI from "./components/KPI";
-import Companies from "./components/Companies";
+import Companies from "./pages/Companies";
 import Projects from "./pages/Projects";
 import ProjectCard from "./components/ProjectNames";
 

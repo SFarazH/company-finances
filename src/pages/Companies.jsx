@@ -1,6 +1,6 @@
 import axios from "axios";
 import { React, useEffect, useState } from "react";
-import CompanyCard from "./CompanyCard";
+import CompanyCard from "../components/CompanyCard";
 
 export default function Companies() {
   const [clientName, setClients] = useState([]);
