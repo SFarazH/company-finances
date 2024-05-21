@@ -5,6 +5,7 @@ import InsightCard from "./components/InsightsCard";
 import { FaRupeeSign, FaBuilding, FaShoppingCart } from "react-icons/fa";
 import { MdAssignment } from "react-icons/md";
 import KPI from "./components/KPI";
+import Companies from "./components/Companies";
 
 const Dashboard = () => {
   //   console.log(State.getStatesOfCountry("IN"));
@@ -12,43 +13,43 @@ const Dashboard = () => {
   const [projectData, setProjectData] = useState([]);
   // const [projectData, setProjectData] = useState([]);
 
-  useEffect(() => {
-    const config = {
-      url: "http://localhost:4000/project/all",
-      method: "get",
-      params: {
-        status: false,
-      },
-    };
-    axios(config)
-      .then((res) => {
-        setProjectData(res.data);
-        console.log(projectData);
-      })
-      .catch((e) => console.error(e));
-  }, []);
+  // useEffect(() => {
+  //   const config = {
+  //     url: "http://localhost:4000/project/all",
+  //     method: "get",
+  //     params: {
+  //       status: false,
+  //     },
+  //   };
+  //   axios(config)
+  //     .then((res) => {
+  //       setProjectData(res.data);
+  //       console.log(projectData);
+  //     })
+  //     .catch((e) => console.error(e));
+  // }, []);
 
-  const [pId, setPId] = useState("");
+  // const [pId, setPId] = useState("");
 
-  useEffect(() => {
-    const config = {
-      url: "http://localhost:4000/project/id",
-      method: "get",
-      params: {
-        projectId: pId,
-      },
-    };
-    axios(config)
-      .then((res) => console.log(res.data.project))
-      .catch((e) => console.error(e));
-  }, [pId]);
+  // useEffect(() => {
+  //   const config = {
+  //     url: "http://localhost:4000/project/id",
+  //     method: "get",
+  //     params: {
+  //       projectId: pId,
+  //     },
+  //   };
+  //   axios(config)
+  //     .then((res) => console.log(res.data.project))
+  //     .catch((e) => console.error(e));
+  // }, [pId]);
 
   return (
     <>
       <div className="p-4 ">
-        
-          <KPI />
-        
+        <KPI />
+        <Companies />
+
         {/* <div className="bg-red-200 container">aa</div> */}
       </div>
       {/* <div className={`flex-shrink-0 h-screen w-16 md:w-60 `}>
