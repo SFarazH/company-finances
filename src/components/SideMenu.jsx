@@ -6,7 +6,7 @@ import sideMenu from "../assets/sidebar.json";
 export default function SideMenu() {
   return (
     <>
-      <Sidebar backgroundColor="#003262" className="h-screen">
+      <Sidebar backgroundColor="#003262" className="h-screen sticky t-0">
         <img src={logo} alt="" className="mx-auto my-4" />
         <Menu
           menuItemStyles={{

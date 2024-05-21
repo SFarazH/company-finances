@@ -6,6 +6,8 @@ import { FaRupeeSign, FaBuilding, FaShoppingCart } from "react-icons/fa";
 import { MdAssignment } from "react-icons/md";
 import KPI from "./components/KPI";
 import Companies from "./components/Companies";
+import Projects from "./pages/Projects";
+import ProjectCard from "./components/ProjectNames";
 
 const Dashboard = () => {
   //   console.log(State.getStatesOfCountry("IN"));
@@ -48,7 +50,8 @@ const Dashboard = () => {
     <>
       <div className="p-4 ">
         <KPI />
-        <Companies />
+        {/* <Companies /> */}
+        <Projects />
 
         {/* <div className="bg-red-200 container">aa</div> */}
       </div>
