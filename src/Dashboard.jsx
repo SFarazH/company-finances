@@ -10,44 +10,13 @@ import Projects from "./pages/Projects";
 import ProjectCard from "./components/ProjectCard";
 import Expenses from "./pages/Expenses";
 import Payments from "./pages/Payments";
+import Purchases from "./pages/Purchases";
 
 const Dashboard = () => {
   //   console.log(State.getStatesOfCountry("IN"));
   // console.log(Country.getAllCountries())
   const [projectData, setProjectData] = useState(null);
   const [paymentsData, setPaymentData] = useState(null);
-  // const [projectData, setProjectData] = useState([]);
-
-  // useEffect(() => {
-  //   const config = {
-  //     url: "http://localhost:4000/project/all",
-  //     method: "get",
-  //     params: {
-  //       status: false,
-  //     },
-  //   };
-  //   axios(config)
-  //     .then((res) => {
-  //       setProjectData(res.data);
-  //       console.log(projectData);
-  //     })
-  //     .catch((e) => console.error(e));
-  // }, []);
-
-  // const [pId, setPId] = useState("");
-
-  // useEffect(() => {
-  //   const config = {
-  //     url: "http://localhost:4000/project/id",
-  //     method: "get",
-  //     params: {
-  //       projectId: pId,
-  //     },
-  //   };
-  //   axios(config)
-  //     .then((res) => console.log(res.data.project))
-  //     .catch((e) => console.error(e));
-  // }, [pId]);
 
   const fetchProjectData = async () => {
     try {
@@ -70,8 +39,6 @@ const Dashboard = () => {
       console.error(error);
     }
   };
-
-  
   const combinedData = { ...projectData, payments: paymentsData };
 
   useEffect(() => {
@@ -86,21 +53,9 @@ const Dashboard = () => {
         {/* <Projects /> */}
         {/* {(projectData && paymentsData) ? <ProjectCard {...combinedData} /> : <h2>Please wait</h2>} */}
         {/* <Expenses/> */}
-        <Payments/>
-        {/* <div className="bg-red-200 container">aa</div> */}
+        {/* <Payments/> */}
+        <Purchases />
       </div>
-      {/* <div className={`flex-shrink-0 h-screen w-16 md:w-60 `}>
-        {projectData.map((proj) => (
-          <>
-            <h4
-              className="border p-2 shadow m-2 hover:border-red-500"
-              onClick={() => setPId(proj._id)}
-            >
-              {proj.projectName}
-            </h4>
-          </>
-        ))}
-      </div> */}
     </>
   );
 };
