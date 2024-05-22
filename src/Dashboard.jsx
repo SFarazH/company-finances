@@ -8,6 +8,7 @@ import KPI from "./components/KPI";
 import Companies from "./pages/Companies";
 import Projects from "./pages/Projects";
 import ProjectCard from "./components/ProjectCard";
+import Expenses from "./pages/Expenses";
 
 const Dashboard = () => {
   //   console.log(State.getStatesOfCountry("IN"));
@@ -73,7 +74,7 @@ const Dashboard = () => {
   const combinedData = { ...projectData, payments: paymentsData };
 
   useEffect(() => {
-    fetchProjectData();
+    // fetchProjectData();
   }, []);
 
   return (
@@ -81,9 +82,9 @@ const Dashboard = () => {
       <div className="p-4 ">
         <KPI />
         {/* <Companies /> */}
-        <Projects />
-        {(projectData && paymentsData) ? <ProjectCard {...combinedData} /> : <h2>Please wait</h2>}
-
+        {/* <Projects /> */}
+        {/* {(projectData && paymentsData) ? <ProjectCard {...combinedData} /> : <h2>Please wait</h2>} */}
+        <Expenses/>
         {/* <div className="bg-red-200 container">aa</div> */}
       </div>
       {/* <div className={`flex-shrink-0 h-screen w-16 md:w-60 `}>

@@ -38,7 +38,6 @@ export default function KPI() {
     axios
       .get("http://localhost:4000/admin/admin")
       .then((res) => {
-        console.log(res.data);
         setKpi(res.data);
       })
       .catch((e) => console.error(e));
