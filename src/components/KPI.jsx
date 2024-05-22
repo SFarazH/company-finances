@@ -28,7 +28,7 @@ export default function KPI() {
     },
     {
       id: 4,
-      category: "Purchases (Month)",
+      category: "Expenses (Month)",
       value: `${kpiArray.expenses} /-`,
       icon: <FaShoppingCart size={30} />,
     },

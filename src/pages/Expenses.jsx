@@ -31,41 +31,33 @@ export default function Expenses() {
       console.error(error);
     }
   };
-
-  const proj = {
-    _id: "664d901bfacb9c32369095fe",
-    expenseCategory: "project",
-    projectPurchaseId: "664d8c9f54f8eb79f7179dda",
-    expenseAmount: 800,
-    expenseDate: "2024-05-22T00:00:00.000Z",
-    billId: "GTYQQ713VB",
-    __v: 0,
-  };
-
   useEffect(() => {
     expenseCategory && getExpenses();
   }, [expenseCategory]);
+
   return (
     <>
-      <p className="text-2xl font-semibold my-4 ">Expenses</p>
-      <div className="grid grid-cols-3 gap-4">
-        {Object.entries(category).map(([key, value]) => (
-          <div
-            onClick={() => {
-              setCategory(key);
-            }}
-            key={key}
-            className="border p-3 rounded-lg  border-gray-500"
-          >
-            {value}
-          </div>
-        ))}
-      </div>
-      <div className="grid grid-cols-2 gap-x-12 ">
-      {expenseData &&
-        expenseData.map((expense) => (
-          <ExpenseCard key={expense._id} {...expense} />
-        ))}
+      <div className="px-8">
+        <p className="text-2xl font-semibold my-4">Expenses</p>
+        <div className="grid grid-cols-5 gap-4">
+          {Object.entries(category).map(([key, value]) => (
+            <div
+              onClick={() => {
+                setCategory(key);
+              }}
+              key={key}
+              className="border p-3 rounded-lg border-gray-500 font-semibold text-white bg-indigo-950 hover:bg-indigo-900 cursor-pointer transition duration-200"
+            >
+              {value}
+            </div>
+          ))}
+        </div>
+        <div className="grid grid-cols-2 gap-x-12">
+          {expenseData &&
+            expenseData.map((expense) => (
+              <ExpenseCard key={expense._id} {...expense} />
+            ))}
+        </div>
       </div>
     </>
   );
