@@ -7,7 +7,7 @@ import { Route, Routes } from "react-router-dom";
 function App() {
   return (
     <>
-      <div className="grid grid-cols-[auto_1fr] overflow-hidden">
+      <div className="grid grid-cols-[auto_1fr]">
         <SideMenu />
         <Dashboard />
       </div>

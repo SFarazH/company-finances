@@ -19,15 +19,16 @@ export default function Projects() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(queryParams);
+    // console.log(queryParams);
     isQuery((prev) => prev + 1);
   };
-  const sortedArray = projects.sort((a, b) => {
+const sortedArray = projects.sort((a, b) => {
     if (a.isClosed === b.isClosed) {
       return 0;
     }
     return a.isClosed ? 1 : -1;
   });
+  // console.log(sortedArray)
 
   useEffect(() => {
     const config = {

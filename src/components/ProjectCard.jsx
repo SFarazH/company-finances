@@ -64,7 +64,7 @@ export default function ProjectCard(props) {
         </div>
 
         <div className="flex justify-between gap-2">
-          <div className=""> 
+          <div className="">
             <p className="my-1">Project Manager : {props.projectManager}</p>
 
             {props.projectConsultant && (
@@ -86,6 +86,12 @@ export default function ProjectCard(props) {
                 {formatDate(props.deliveryDate)}
               </span>
             </p>
+            <div className="p-4 bg-red-100 mt-2">
+              <p className="text-lg py-2 font-semibold">Purchases</p>
+              {props.projectPurchasesArray.map((purchase) => (
+                <p>{purchase.productName}</p>
+              ))}
+            </div>
           </div>
 
           <div className="w-1/3">
@@ -103,7 +109,7 @@ export default function ProjectCard(props) {
               </div>
 
               <div className="mt-4">
-                {payment.map((pay) => (
+                {props.payments.map((pay) => (
                   <div className="flex justify-between">
                     <p>{formatDate(pay.paymentDate)}</p>
                     <p className="font-semibold">{pay.receivedAmount}</p>
@@ -120,12 +126,6 @@ export default function ProjectCard(props) {
                   price={props.projectLiability}
                 />
               </div>
-            </div>
-            <div className="p-4 bg-red-100 mt-2">
-              <p className="text-lg py-2 font-semibold">Purchases</p>
-              {props.projectPurchasesArray.map((purchase) => (
-                <p>{purchase.productName}</p>
-              ))}
             </div>
           </div>
 
