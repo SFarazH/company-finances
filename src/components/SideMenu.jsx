@@ -1,19 +1,9 @@
-import React from "react";
-import { Sidebar, Menu, MenuItem, SubMenu } from "react-pro-sidebar";
+import React from "react";;
 import logo from "../assets/main_logo.png";
 import sideMenu from "../assets/sidebar.json";
 import { Link } from "react-router-dom";
 
 export default function SideMenu() {
-  // const menuItemStyles={{
-
-  //     "&:hover": {
-  //       backgroundColor:"skyblue",
-  //       color: "black",
-  //       borderRadius: "10px",
-  //     },
-
-  // }}
   return (
     <>
       <div className="h-screen sticky top-0 bg-[#003262]">
@@ -31,24 +21,6 @@ export default function SideMenu() {
           ))}
         </div>
       </div>
-      {/*
-        
-        <Menu
-          
-          className="mt-[80px]"
-        >
-          {sideMenu.map((item) => (
-            <Link to={item.link}>
-              <MenuItem
-                id={item.id}
-                className="text-md font-bold text-white px-2"
-              >
-                {item.heading}
-              </MenuItem>
-            </Link>
-          ))}
-        </Menu>
-      </Sidebar> */}
     </>
   );
 }
