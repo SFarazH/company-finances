@@ -5,20 +5,36 @@ import sideMenu from "../assets/sidebar.json";
 import { Link } from "react-router-dom";
 
 export default function SideMenu() {
+  // const menuItemStyles={{
+
+  //     "&:hover": {
+  //       backgroundColor:"skyblue",
+  //       color: "black",
+  //       borderRadius: "10px",
+  //     },
+
+  // }}
   return (
     <>
-      <Sidebar backgroundColor="#003262" className="h-screen sticky t-0">
-        <img src={logo} alt="" className="mx-auto my-4" />
+      <div className="h-screen sticky top-0 bg-[#003262]">
+        <img src={logo} alt="" className="mx-auto py-4" />
+        <div className="grid grid-flow-row gap-4 mt-4">
+          {sideMenu.map((item) => (
+            <Link to={item.link}>
+              <p
+                key={item.id}
+                className="text-white mx-4 p-4 px-8 text-lg font-semibold hover:cursor-pointer hover:bg-[#87CEFA] rounded-full hover:text-black"
+              >
+                {item.heading}
+              </p>
+            </Link>
+          ))}
+        </div>
+      </div>
+      {/*
+        
         <Menu
-          menuItemStyles={{
-            button: {
-              "&:hover": {
-                backgroundColor: "skyblue",
-                color: "black",
-                borderRadius: "10px",
-              },
-            },
-          }}
+          
           className="mt-[80px]"
         >
           {sideMenu.map((item) => (
@@ -32,7 +48,7 @@ export default function SideMenu() {
             </Link>
           ))}
         </Menu>
-      </Sidebar>
+      </Sidebar> */}
     </>
   );
 }

@@ -9,15 +9,17 @@ import Projects from "./pages/Projects";
 import Purchases from "./pages/Purchases";
 import Payments from "./pages/Payments";
 
-
 function App() {
   return (
     <Router>
-      <div className="grid grid-cols-[auto_1fr]">
-        <SideMenu />
-        <div>
+      <div className="flex">
+        <div className="w-2/12">
+          <SideMenu />
+        </div>
+
+        <div className="w-10/12">
           <KPI />
-          
+
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/clients" element={<Companies />} />
