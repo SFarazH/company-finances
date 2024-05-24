@@ -2,7 +2,9 @@ import React, { useState, useEffect } from "react";
 import { FaCircle } from "react-icons/fa";
 import { PiCpuFill } from "react-icons/pi";
 import { FaLaptop } from "react-icons/fa";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import { IoArrowBackCircle } from "react-icons/io5";
+
 import axios from "axios";
 
 export default function ProjectCard(props) {
@@ -20,7 +22,9 @@ export default function ProjectCard(props) {
         }`}
       >
         <p>{props.category}</p>
-        <p>{props.price}</p>
+        <p className={`${props.color && `text-${props.color} font-semibold`}`}>
+          {props.price}
+        </p>
       </div>
     );
   };
@@ -77,114 +81,133 @@ export default function ProjectCard(props) {
   return (
     <>
       {data && (
-        <div className="border rounded-lg p-3 my-2">
-          <div className="flex justify-between items-center mb-4">
-            <p className="text-xl font-semibold">
-              {data.projectName} - <span className="pl-4">{props?.client}</span>
-            </p>
-            <div className="flex gap-4 items-center">
-              <FaCircle size="1.5em" color={data.isClosed ? `red` : `green`} />
-              {data.projectType === "software" ? (
-                <FaLaptop size="2em" />
-              ) : (
-                <PiCpuFill size="2em" />
-              )}
-            </div>
-          </div>
-
-          <div className="flex justify-between gap-2">
-            <div className="">
-              <p className="my-1">Project Manager : {data.projectManager}</p>
-
-              {data.projectConsultant && (
-                <p className="my-1">
-                  Project Consultant : {data.projectConsultant.name}
-                </p>
-              )}
-
-              <p className="my-1">
-                Received Date :{" "}
-                <span className="font-semibold">
-                  {formatDate(data.dateReceived)}
-                </span>
+        <div className="mt-2">
+          <Link to="/projects">
+            <IoArrowBackCircle size={35} color="green" />{" "}
+          </Link>
+          <div className="border rounded-lg p-2 mt-2">
+            <div className="flex justify-between items-center mb-8">
+              <p className="text-2xl font-semibold">
+                <span className="text-[#002147]">{data.projectName}</span> -{" "}
+                <span className="pl-4 text-xl">{data.client}</span>
               </p>
-
-              <p className="my-1">
-                Delivery Date :{" "}
-                <span className="font-semibold">
-                  {formatDate(data.deliveryDate)}
-                </span>
-              </p>
-              <div className="p-4 bg-red-100 mt-2">
-                <p className="text-lg py-2 font-semibold">Purchases</p>
-                {data.projectPurchasesArray.map((purchase) => (
-                  <p>{purchase.productName}</p>
-                ))}
+              <div className="flex gap-4 items-center">
+                <FaCircle
+                  size="1.5em"
+                  color={data.isClosed ? `red` : `green`}
+                />
+                {data.projectType === "software" ? (
+                  <FaLaptop size="2em" />
+                ) : (
+                  <PiCpuFill size="2em" />
+                )}
               </div>
             </div>
 
-            <div className="w-1/3">
-              <div className="bg-gray-100 p-4">
-                <p className="text-lg py-2 font-semibold">Payments</p>
+            <div className="grid grid-cols-3 gap-4">
+              <div className="text-lg">
+                <p className="mb-4">Project Manager : {data.projectManager}</p>
 
-                <div className="flex justify-between items-center gap-2">
-                  <ProgressBar
-                    progressPercentage={data.paymentPercentReceivedTillDate}
-                  />
-
-                  <p className="font-semibold text-md text-center">
-                    ({Math.round(data.paymentPercentReceivedTillDate)}%)
+                {data.projectConsultant && (
+                  <p className="my-4">
+                    Project Consultant : {data.projectConsultant.name}
                   </p>
-                </div>
+                )}
 
-                <div className="mt-4">
-                  {data.payments.map((pay) => (
-                    <div className="flex justify-between">
-                      <p>{formatDate(pay.paymentDate)}</p>
-                      <p className="font-semibold">{pay.receivedAmount}</p>
-                    </div>
+                <p className="my-4">
+                  Received Date :{" "}
+                  <span className="font-semibold">
+                    {formatDate(data.dateReceived)}
+                  </span>
+                </p>
+
+                <p className="my-4">
+                  Delivery Date :{" "}
+                  <span className="font-bold text-red-500">
+                    {formatDate(data.deliveryDate)}
+                  </span>
+                </p>
+              </div>
+
+              <div className="">
+                <div className="bg-gray-100 p-2 px-3 rounded-lg">
+                  <p className="text-lg py-2 font-semibold">Payments</p>
+
+                  <div className="flex justify-between items-center gap-2">
+                    <ProgressBar
+                      progressPercentage={data.paymentPercentReceivedTillDate}
+                    />
+
+                    <p className="font-semibold text-md text-center">
+                      ({Math.round(data.paymentPercentReceivedTillDate)}%)
+                    </p>
+                  </div>
+
+                  <div className="mt-4">
+                    {data.payments.map((pay) => (
+                      <div className="flex justify-between">
+                        <p>{formatDate(pay.paymentDate)}</p>
+                        <p className="font-semibold font-lg">
+                          {pay.receivedAmount}
+                        </p>
+                      </div>
+                    ))}
+                    <br />
+                    <PriceList
+                      category="Amount Received"
+                      price={data.paymentReceivedTillDate}
+                      topborder
+                    />
+                    <PriceList
+                      category="Liability"
+                      color="red-500"
+                      price={data.projectLiability}
+                    />
+                  </div>
+                </div>
+                <div className="p-2 px-3 bg-red-100 mt-3 rounded-lg">
+                  <p className="text-lg py-2 font-semibold">Purchases</p>
+                  {data.projectPurchasesArray.map((purchase) => (
+                    <p>{purchase.productName}</p>
                   ))}
+                </div>
+              </div>
+
+              <div className="">
+                <div className=" bg-gray-100 p-2 px-3 rounded-lg">
+                  <p className="text-lg py-1 font-semibold">Finances</p>
+                  <PriceList
+                    category="Net Receivable"
+                    price={data.finalPrice}
+                  />
                   <br />
                   <PriceList
-                    category="Amount Received"
-                    price={data.paymentReceivedTillDate}
+                    category="Project Purchases"
+                    price={data.projectPurchasesCost}
+                  />
+                  {Object.entries(data.GST).map(([key, value]) => (
+                    <PriceList
+                      category={`${key} - ${value}%`}
+                      price={data.finalPrice * (value / 100)}
+                    />
+                  ))}
+                  <PriceList
+                    category={`TDS - ${data.TDS}%`}
+                    price={data.finalPrice * (data.TDS / 100)}
+                  />
+                  <PriceList
+                    category="Consultant Fee"
+                    price={
+                      data.projectConsultant ? data.projectConsultant.price : 0
+                    }
+                  />
+                  <br />
+                  <PriceList
+                    category="Profit"
+                    price={data.netProfit}
                     topborder
                   />
-                  <PriceList
-                    category="Liability"
-                    price={data.projectLiability}
-                  />
                 </div>
-              </div>
-            </div>
-
-            <div className="w-1/3">
-              <div className=" bg-gray-100 px-4">
-                <p className="text-lg py-2 font-semibold">Finances</p>
-                <PriceList category="Net Receivable" price={data.finalPrice} />
-                <br />
-                <PriceList
-                  category="Project Purchases"
-                  price={data.projectPurchasesCost}
-                />
-                {Object.entries(data.GST).map(([key, value]) => (
-                  <PriceList
-                    category={`${key} - ${value}%`}
-                    price={data.finalPrice * (value / 100)}
-                  />
-                ))}
-                <PriceList
-                  category={`TDS - ${data.TDS}%`}
-                  price={data.finalPrice * (data.TDS / 100)}
-                />
-                <PriceList
-                  category="Consultant Fee"
-                  price={
-                    data.projectConsultant ? data.projectConsultant.price : 0
-                  }
-                />
-                <br />
-                <PriceList category="Profit" price={data.netProfit} topborder />
               </div>
             </div>
           </div>

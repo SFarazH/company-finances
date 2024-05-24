@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 export default function CompanyCard(props) {
   return (
@@ -15,7 +16,13 @@ export default function CompanyCard(props) {
             <div className="my-4">
               <p className="font-semibold text-lg pb-2">Projects</p>
               {props.projects.map((project) => (
-                <p>{project.projectName}</p>
+                // console.log(project)
+                <Link
+                  to={`/projects/${project.projectId}`}
+                  onClick={() => console.log(project.projectId)}
+                >
+                  <p>{project.projectName}</p>
+                </Link>
               ))}
             </div>
           </div>

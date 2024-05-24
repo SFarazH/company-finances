@@ -44,7 +44,7 @@ export default function Projects() {
 
   return (
     <div className="px-8">
-      <p className="text-3xl font-semibold my-4">Projects</p>
+      <p className="text-3xl font-semibold my-4 mb-6">Projects</p>
       <Routes>
         <Route
           path="/"
