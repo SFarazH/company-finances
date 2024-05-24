@@ -2,21 +2,7 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { FaRupeeSign } from "react-icons/fa";
 
-const data = {
-  _id: "664d8c9f54f8eb79f7179dda",
-  projectId: "6645a500553bc5e81381b97a",
-  projectName: "PCA Toolkit",
-  productName: "domain name",
-  finalPriceProduct: 1000,
-  paymentCompletedTillDate: 1000,
-  purchaseDate: "2024-04-10T00:00:00.000Z",
-  paymentPercentCompletedTillDate: 80,
-  paymentLiability: 0,
-  projectExpenses: ["664d901bfacb9c32369095fe", "664f032b0fadb0d173ea3319"],
-};
-
 export default function PurchaseCard(props) {
-  console.log("props", props);
   const [payments, setPayments] = useState(null);
 
   const getPaymentsDone = async (id) => {

@@ -60,7 +60,7 @@ export default function Payments(props) {
   return (
     <>
       <div className="px-8">
-        <p className="text-2xl font-semibold my-4">Payments</p>
+        <p className="text-3xl font-semibold my-4">Payments</p>
         <form
           className="flex justify-between items-center gap-4 p-4 bg-gray-100 rounded-lg "
           onSubmit={(e) => {

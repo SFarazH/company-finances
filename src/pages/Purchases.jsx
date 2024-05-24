@@ -35,7 +35,7 @@ export default function Purchases() {
   return (
     <>
       <div className="px-8">
-        <p className="text-2xl font-semibold my-4">Purchases</p>
+        <p className="text-3xl font-semibold my-4">Purchases</p>
         {purchases &&
           purchases.map((purchase) => (
             <div

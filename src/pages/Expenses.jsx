@@ -38,7 +38,7 @@ export default function Expenses() {
   return (
     <>
       <div className="px-8">
-        <p className="text-2xl font-semibold my-4">Expenses</p>
+        <p className="text-3xl font-semibold my-4">Expenses</p>
         <div className="grid grid-cols-5 gap-4">
           {Object.entries(category).map(([key, value]) => (
             <div
