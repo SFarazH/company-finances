@@ -1,4 +1,4 @@
-import React from "react";;
+import React from "react";
 import logo from "../assets/main_logo.png";
 import sideMenu from "../assets/sidebar.json";
 import { Link } from "react-router-dom";
