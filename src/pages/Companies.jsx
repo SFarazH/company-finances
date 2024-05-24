@@ -20,7 +20,7 @@ export default function Companies() {
 
   return (
     <>
-      <div>
+      <div className="px-8">
         <p className="text-2xl font-semibold mb-4 ">Companies</p>
         {clientName.map((client) => (
           <div key={client._id} className="my-2">

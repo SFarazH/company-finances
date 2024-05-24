@@ -1,16 +1,6 @@
 import { React, useEffect, useState } from "react";
 import axios from "axios";
 import { Country, State, City } from "country-state-city";
-import InsightCard from "./components/InsightsCard";
-import { FaRupeeSign, FaBuilding, FaShoppingCart } from "react-icons/fa";
-import { MdAssignment } from "react-icons/md";
-import KPI from "./components/KPI";
-import Companies from "./pages/Companies";
-import Projects from "./pages/Projects";
-import ProjectCard from "./components/ProjectCard";
-import Expenses from "./pages/Expenses";
-import Payments from "./pages/Payments";
-import Purchases from "./pages/Purchases";
 
 const Dashboard = () => {
   //   console.log(State.getStatesOfCountry("IN"));
@@ -47,14 +37,8 @@ const Dashboard = () => {
 
   return (
     <>
-      <div className="p-4 ">
-        <KPI />
-        {/* <Companies /> */}
-        {/* <Projects /> */}
-        {/* {(projectData && paymentsData) ? <ProjectCard {...combinedData} /> : <h2>Please wait</h2>} */}
-        {/* <Expenses/> */}
-        {/* <Payments/> */}
-        <Purchases />
+      <div className="px-8">
+        <p className="text-2xl">Dashboard</p>
       </div>
     </>
   );
