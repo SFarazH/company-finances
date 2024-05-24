@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import ExpenseCard from "../components/ExpenseCard";
+import Spinner from "../components/Spinner";
 
 export default function Expenses() {
   // cateory = salary , project expenses , snacks , bills , misc
@@ -11,7 +12,15 @@ export default function Expenses() {
     snacks: "Snacks",
     misc: "Miscellaneous",
   };
+  const [showLoader, setShowLoader] = useState(true);
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowLoader(false);
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, []);
   const [expenseCategory, setCategory] = useState("");
   const [expenseData, setExpenses] = useState(null);
 
@@ -37,7 +46,7 @@ export default function Expenses() {
 
   return (
     <>
-      <div className="px-8">
+      {showLoader?<Spinner/>:<div className="px-8">
         <p className="text-3xl font-semibold my-4">Expenses</p>
         <div className="grid grid-cols-5 gap-4">
           {Object.entries(category).map(([key, value]) => (
@@ -58,7 +67,7 @@ export default function Expenses() {
               <ExpenseCard key={expense._id} {...expense} />
             ))}
         </div>
-      </div>
+      </div>}
     </>
   );
 }

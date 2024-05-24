@@ -1,6 +1,7 @@
 import axios from "axios";
 import { React, useEffect, useState } from "react";
 import CompanyCard from "../components/CompanyCard";
+import Spinner from "../components/Spinner";
 
 export default function Companies() {
   const [clientName, setClients] = useState([]);
@@ -10,6 +11,15 @@ export default function Companies() {
   const toggleAccordion = (companyId) => {
     setExpandedCompany(expandedCompany === companyId ? null : companyId);
   };
+  const [showLoader, setShowLoader] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowLoader(false);
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     axios
@@ -20,7 +30,7 @@ export default function Companies() {
 
   return (
     <>
-      <div className="px-8">
+      {showLoader ? <Spinner/> : <div className="px-8">
         <p className="text-3xl font-semibold my-4 ">Companies</p>
         {clientName.map((client) => (
           <div key={client._id} className="my-2">
@@ -38,7 +48,7 @@ export default function Companies() {
             )}
           </div>
         ))}
-      </div>
+      </div>}
     </>
   );
 }

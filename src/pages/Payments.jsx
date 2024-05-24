@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import PaymentCard from "../components/PaymentCard";
 import { FaCheck } from "react-icons/fa";
+import Spinner from "../components/Spinner";
 
 export default function Payments(props) {
   const [paymentData, setPayment] = useState(null);
@@ -12,6 +13,16 @@ export default function Payments(props) {
   });
   const [temp, setTemp] = useState(0);
   const [projNames, setNames] = useState(null);
+
+  const [showLoader, setShowLoader] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowLoader(false);
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   const getNames = async () => {
     const config = {
@@ -59,7 +70,7 @@ export default function Payments(props) {
 
   return (
     <>
-      <div className="px-8">
+      {showLoader ? <Spinner/>:<div className="px-8">
         <p className="text-3xl font-semibold my-4">Payments</p>
         <form
           className="flex justify-between items-center gap-4 p-4 bg-gray-100 rounded-lg "
@@ -145,7 +156,7 @@ export default function Payments(props) {
             </p>
           )}
         </div>
-      </div>
+      </div>}
     </>
   );
 }

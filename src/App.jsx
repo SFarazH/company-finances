@@ -9,6 +9,7 @@ import Projects from "./pages/Projects";
 import Purchases from "./pages/Purchases";
 import Payments from "./pages/Payments";
 
+
 function App() {
   return (
     <Router>
@@ -16,6 +17,7 @@ function App() {
         <SideMenu />
         <div>
           <KPI />
+          
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/clients" element={<Companies />} />
