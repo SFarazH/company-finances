@@ -1,5 +1,6 @@
 import React from "react";
-import { FaRupeeSign } from "react-icons/fa";
+import { FaRupeeSign, FaExternalLinkAlt } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 export default function PaymentCard(props) {
   const p = {
@@ -25,11 +26,16 @@ export default function PaymentCard(props) {
             {formatDate(props.paymentDate)}
           </p>
           <p className="text-2xl font-semibold">{props.projectName}</p>
-          <p className="text-lg font-semibold bg-green-600 w-fit p-3 rounded-full text-white flex items-center gap-1">
-            <FaRupeeSign /> {props.receivedAmount}
-          </p>
+
+          <div className="flex gap-8 items-center">
+            <Link target="_blank" to={`/projects/${props.projectId}`}>
+              <FaExternalLinkAlt size={20} />
+            </Link>
+            <p className="text-lg font-semibold bg-green-600 w-fit p-3 rounded-full text-white flex items-center gap-1">
+              <FaRupeeSign /> {props.receivedAmount}
+            </p>
+          </div>
         </div>
-        
       </div>
     </>
   );

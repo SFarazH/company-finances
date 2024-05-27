@@ -55,7 +55,7 @@ export default function Expenses() {
                 setCategory(key);
               }}
               key={key}
-              className="border p-3 rounded-lg border-gray-500 font-semibold text-white bg-indigo-950 hover:bg-indigo-900 cursor-pointer transition duration-200"
+              className="p-3 rounded-lg border-gray-500 font-semibold text-white bg-indigo-950 hover:bg-indigo-900 cursor-pointer transition duration-200"
             >
               {value}
             </div>

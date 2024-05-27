@@ -45,7 +45,7 @@ export default function KPI() {
 
   return (
     <>
-      <div className="flex gap-8 px-8 bg-red-500">
+      <div className="flex gap-8 px-8 bg-[#81523F] text-[#E8EEF2]">
         {kpi.map((k) => (
           <InsightCard {...k} />
         ))}

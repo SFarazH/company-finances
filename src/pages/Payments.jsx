@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import PaymentCard from "../components/PaymentCard";
 import { FaCheck } from "react-icons/fa";
 import Spinner from "../components/Spinner";
+import { FaExternalLinkAlt } from "react-icons/fa";
 
 export default function Payments(props) {
   const [paymentData, setPayment] = useState(null);
