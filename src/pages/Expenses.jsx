@@ -20,7 +20,6 @@ export default function Expenses() {
 
     return () => clearTimeout(timer);
   }, []);
-  const [expenseCategory, setCategory] = useState("");
 
   return (
     <>
@@ -37,9 +36,6 @@ export default function Expenses() {
                   {Object.entries(category).map(([key, value]) => (
                     <Link to={`/expenses/${key}`}>
                       <div
-                        onClick={() => {
-                          setCategory(key);
-                        }}
                         key={key}
                         className="p-3 rounded-lg border-gray-500 font-semibold text-white bg-indigo-950 hover:bg-indigo-900 cursor-pointer transition duration-200"
                       >
@@ -54,10 +50,7 @@ export default function Expenses() {
               path=":expenseCategory"
               element={
                 <div className="">
-                  <ExpenseCategory
-                    category={expenseCategory}
-                    heading={category[expenseCategory]}
-                  />
+                  <ExpenseCategory />
                 </div>
               }
             />
