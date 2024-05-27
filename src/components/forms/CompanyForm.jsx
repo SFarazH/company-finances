@@ -14,7 +14,7 @@ const CompanyForm = ({ setIsForm, setTemp }) => {
     const companyAddress = {
       street: data.street,
       city: data.city,
-      state: data.city,
+      state: data.state,
       country: data.country,
       pincode: data.pincode,
     };
