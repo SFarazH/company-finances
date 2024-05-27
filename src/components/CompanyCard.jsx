@@ -21,9 +21,8 @@ export default function CompanyCard(props) {
                 // console.log(project)
                 <Link
                   to={`/projects/${project.projectId}`}
-                  onClick={() => console.log(project.projectId)}
                 >
-                  <p>{project.projectName}</p>
+                  <p className="font-semibold my-1 hover:text-indigo-800 hover:font-bold">{project.projectName}</p>
                 </Link>
               ))}
             </div>
