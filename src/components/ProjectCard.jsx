@@ -174,7 +174,9 @@ export default function ProjectCard(props) {
                 <div className="p-2 px-3 bg-red-100 mt-3 rounded-lg">
                   <p className="text-lg py-2 font-semibold">Purchases</p>
                   {data.projectPurchasesArray.map((purchase) => (
-                    <p>{purchase.productName}</p>
+                    <Link to={`/purchases/${purchase.projectPurcaseId}`}>
+                      <p className="text-lg font-semibold">{purchase.productName}</p>
+                    </Link>
                   ))}
                 </div>
               </div>
