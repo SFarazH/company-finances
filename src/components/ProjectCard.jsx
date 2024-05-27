@@ -4,10 +4,12 @@ import { PiCpuFill } from "react-icons/pi";
 import { FaLaptop } from "react-icons/fa";
 import { Link, useParams } from "react-router-dom";
 import { IoArrowBackCircle } from "react-icons/io5";
+import { useNavigate } from "react-router-dom";
 
 import axios from "axios";
 
 export default function ProjectCard(props) {
+  let navigate = useNavigate();
   function formatDate(isoString) {
     const date = new Date(isoString);
 
@@ -82,9 +84,13 @@ export default function ProjectCard(props) {
     <>
       {data && (
         <div className="mt-2">
-          <Link to="/projects">
-            <IoArrowBackCircle size={35} color="green" />{" "}
-          </Link>
+          <IoArrowBackCircle
+            size={35}
+            color="green"
+            className="cursor-pointer"
+            onClick={() => navigate(-1)}
+          />
+
           <div className="border rounded-lg p-2 mt-2">
             <div className="flex justify-between items-center mb-8">
               <p className="text-2xl font-semibold">
