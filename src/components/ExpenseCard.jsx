@@ -1,14 +1,16 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
+import { PiMicrophoneSlash } from "react-icons/pi";
 
 export default function ExpenseCard(props) {
+  console.log(props);
   const [projectDetails, setProjectData] = useState(null);
   const getProjDetails = async () => {
     const config = {
       url: "http://localhost:4000/purchase/id",
       method: "get",
       params: {
-        projectPurchaseId: "664d8c9f54f8eb79f7179dda",
+        projectPurchaseId: props.projectPurchaseId,
       },
     };
     try {
@@ -32,7 +34,7 @@ export default function ExpenseCard(props) {
 
   return (
     <>
-      <div className="border my-4 rounded-t-lg border-gray-900">
+      <div className="border my-4 rounded-xl border-gray-900 overflow-hidden">
         <div className="flex p-4 rounded-t-lg justify-between mb-2 bg-blue-900 text-white">
           <p className="text-lg font-semibold">
             {formatDate(props.expenseDate)}
@@ -45,41 +47,48 @@ export default function ExpenseCard(props) {
           </p>
         </div>
         <div className="p-4">
-          <p className="text-lg pb-1">
-            Amount :{" "}
-            <span className="font-bold  text-red-600">
-              {props.expenseAmount}
-            </span>
-          </p>
-
-          <div className="text-lg">
-            {projectDetails && (
-              <>
-                <p>
-                  Project :{" "}
-                  <span className="font-semibold">
-                    {projectDetails.projectName}
-                  </span>
-                </p>
-                <p>
-                  Product :{" "}
-                  <span className="font-semibold">
-                    {projectDetails.productName}
-                  </span>
-                </p>
-              </>
+          <div className="flex justify-between">
+            <p className="text-lg pb-1">
+              Amount :{" "}
+              <span className="font-bold text-xl text-red-600">
+                {props.expenseAmount}
+              </span>
+            </p>
+            {props.expenseComments && (
+              <p className="text-lg">
+                Details :{" "}
+                <span className="text-indigo-800 font-semibold">
+                  {props.expenseComments}
+                </span>
+              </p>
             )}
           </div>
 
-          <p className="text-lg">
-            Details :{" "}
-            <span className="text-indigo-800 font-semibold">
-              {props.expenseComments}
-            </span>
-          </p>
-          {props.billId && (
-            <p className="text-lg mt-2">Bill ID : {props.billId}</p>
-          )}
+          <div className="text-lg flex justify-between">
+            <div>
+              {projectDetails && (
+                <>
+                  <p>
+                    Project :{" "}
+                    <span className="font-semibold">
+                      {projectDetails.projectName}
+                    </span>
+                  </p>
+                  <p>
+                    Product :{" "}
+                    <span className="font-semibold">
+                      {projectDetails.productName}
+                    </span>
+                  </p>
+                </>
+              )}
+            </div>
+            <div>
+              {props.billId && (
+                <p className="text-lg mt-2">Bill ID : {props.billId}</p>
+              )}
+            </div>
+          </div>
         </div>
       </div>
     </>
