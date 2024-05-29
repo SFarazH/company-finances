@@ -1,78 +1,195 @@
+import React, { useEffect, useState } from "react";
+import { Line } from "react-chartjs-2";
+import {
+  Chart as ChartJS,
+  LineElement,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js";
 import axios from "axios";
-import React, { useState, useEffect } from "react";
-import { Bar, Line } from "react-chartjs-2";
-import "chart.js/auto";
 
-const LineChart = () => {
-  const [projectsByMonth, setProjectsByMonth] = useState(null);
+ChartJS.register(
+  LineElement,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
-  const getOrdersByMonth = (projects) => {
+const LineChart = ({ year }) => {
+  const [expenses, setExpenses] = useState({});
+  const [payments, setPayments] = useState({});
+
+  const sortPaymentsByMonth = (array) => {
     const temp = {};
     const currentYear = new Date().getFullYear();
 
-    projects.map((project) => {
-      const date = new Date(project.dateReceived);
+    array.map((project) => {
+      const date = new Date(project.paymentDate);
       const year = date.getFullYear();
 
       if (year === currentYear) {
         const month = date.toLocaleString("default", { month: "short" });
         const str = month + year.toString().slice(2);
-        temp[str] ? (temp[str] += 1) : (temp[str] = 1);
+        temp[month]
+          ? (temp[month] += project.receivedAmount)
+          : (temp[month] = project.receivedAmount);
+      }
+    });
+    const months = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
+
+    months.forEach((month) => {
+      if (!temp[month]) {
+        temp[month] = 0;
       }
     });
 
-    return temp;
+    const sortedTemp = {};
+    months.forEach((month) => {
+      sortedTemp[month] = temp[month];
+    });
+
+    return sortedTemp;
+  };
+
+  const sortExpensessByMonth = (array) => {
+    const temp = {};
+    const currentYear = new Date().getFullYear();
+
+    array.map((project) => {
+      const date = new Date(project.expenseDate);
+      const year = date.getFullYear();
+
+      if (year === currentYear) {
+        const month = date.toLocaleString("default", { month: "short" });
+        const str = month + year.toString().slice(2);
+        temp[month]
+          ? (temp[month] += project.expenseAmount)
+          : (temp[month] = project.expenseAmount);
+      }
+    });
+    const months = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
+
+    months.forEach((month) => {
+      if (!temp[month]) {
+        temp[month] = 0;
+      }
+    });
+
+    const sortedTemp = {};
+    months.forEach((month) => {
+      sortedTemp[month] = temp[month];
+    });
+
+    return sortedTemp;
+  };
+
+  const getData = async () => {
+    const url1 = "http://localhost:4000/payment/get";
+    const url2 = "http://localhost:4000/expense/all";
+    const config = {
+      params: {
+        year: year,
+      },
+    };
+    axios
+      .all([
+        axios.get(url1, config).then((res) => {
+          setPayments(sortPaymentsByMonth(res.data));
+        }),
+        axios
+          .get(url2, config)
+          .then((res) => setExpenses(sortExpensessByMonth(res.data))),
+      ])
+      //   .then((res) => {
+      //     console.log(res);
+      //   })
+      .catch((e) => console.error(e));
   };
 
   useEffect(() => {
-    // Fetch data from API
-    const fetchData = async () => {
-      axios
-        .get("http://localhost:4000/project/all")
-        .then((res) => setProjectsByMonth(getOrdersByMonth(res.data)))
-        .catch((e) => console.error("Error fetching data:", e));
-    };
+    getData();
+  }, [year]);
 
-    fetchData();
-  }, []);
+  const months = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
 
-  console.log(projectsByMonth);
-
-  //   projectsByMonth &&
-  let monthNames = projectsByMonth && Object.keys(projectsByMonth);
-  let counts = projectsByMonth && Object.values(projectsByMonth);
-
-  const chartData = {
-    labels: monthNames,
+  const expenseData = months.map((month) => expenses[month] || 0);
+  const paymentData = months.map((month) => payments[month] || 0);
+  const data = {
+    labels: months,
     datasets: [
       {
-        label: "Projects Received",
-        backgroundColor: "rgba(75,192,192,1)",
-        borderColor: "rgba(0,0,0,1)",
-        borderWidth: 1,
-        data: counts,
+        label: "Expenses",
+        data: expenseData,
+        borderColor: "rgba(255, 99, 132, 1)",
+        backgroundColor: "rgba(255, 99, 132, 0.2)",
+      },
+      {
+        label: "Payments",
+        data: paymentData,
+        borderColor: "rgba(54, 162, 235, 1)",
+        backgroundColor: "rgba(54, 162, 235, 0.2)",
       },
     ],
   };
 
-  // Define options for the chart
-  const chartOptions = {
+  const options = {
     scales: {
-      yAxes: [
-        {
-          ticks: {
-            beginAtZero: true,
-            min: 0,
-            precision: 0,
-          },
-        },
-      ],
+      y: {
+        beginAtZero: true,
+      },
     },
   };
+
   return (
     <div>
-      <h2>Projects Received by Month</h2>
-      <Bar data={chartData} options={chartOptions} />
+      {" "}
+      <Line data={data} options={options} />
     </div>
   );
 };

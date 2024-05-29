@@ -16,8 +16,8 @@ export default function SideMenu() {
             return <Link to={item.link}>
               <p
                 key={item.id}
-                className={`text-white mx-4 p-4 px-8 text-lg font-semibold hover:cursor-pointer hover:bg-[#87CEFA] rounded-full hover:text-black ${
-                  isActive ? "bg-[#87CEFA] text-black" : ""
+                className={`mx-4 p-4 px-8 text-lg font-semibold hover:cursor-pointer hover:bg-[#87CEFA] rounded-full hover:text-black ${
+                  isActive ? "bg-[#87CEFA] text-black" : "text-white"
                 }`}
               >
                 {item.heading}
