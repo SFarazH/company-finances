@@ -21,7 +21,21 @@ const Dashboard = () => {
   return (
     <>
       <div className="px-8 bg-gray-100 min-h-screen">
-        <p className="text-3xl text-center font-bold py-8">Dashboard</p>
+        <div className="flex justify-between items-center">
+          <p className="text-3xl text-center font-bold py-8">Dashboard</p>
+
+          <select
+            className="rounded-2xl h-fit text-lg p-2 px-3 appearance-none focus:outline-none focus:ring-1 focus:ring-blue-300 overflow-y-auto"
+            value={selectedYear}
+            onChange={handleYearChange}
+          >
+            {years.map((year) => (
+              <option key={year} value={year}>
+                {year}
+              </option>
+            ))}
+          </select>
+        </div>
         <div className="flex gap-5 mb-8">
           <div className="w-1/2 bg-white  rounded-lg">
             <p className="text-xl p-2 font-semibold bg-indigo-900 text-white rounded-t-lg">
@@ -36,17 +50,6 @@ const Dashboard = () => {
               <p className="text-xl text-white font-semibold ">
                 Projects Received
               </p>
-              <select
-                className="rounded-2xl px-2 appearance-none focus:outline-none focus:ring-1 focus:ring-blue-300 overflow-y-auto"
-                value={selectedYear}
-                onChange={handleYearChange}
-              >
-                {years.map((year) => (
-                  <option key={year} value={year}>
-                    {year}
-                  </option>
-                ))}
-              </select>
             </div>
             <div className="p-1 py-4">
               <BarGraph year={selectedYear} />
@@ -59,17 +62,6 @@ const Dashboard = () => {
               <p className="text-xl text-white font-semibold ">
                 Expense v Payments
               </p>
-              <select
-                className="rounded-2xl px-2 appearance-none focus:outline-none focus:ring-1 focus:ring-blue-300 overflow-y-auto"
-                value={selectedYear}
-                onChange={handleYearChange}
-              >
-                {years.map((year) => (
-                  <option key={year} value={year}>
-                    {year}
-                  </option>
-                ))}
-              </select>
             </div>
             <div className="p-1 py-4">
               <LineChart year={selectedYear} />
