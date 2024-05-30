@@ -1,6 +1,6 @@
 import { React, useEffect, useState } from "react";
 import axios from "axios";
-import DonutChart from "./components/DonutChart";
+import DonutChart from "./components/charts/DonutChart";
 import BarGraph from "./components/charts/BarChart";
 import PieChart from "./components/charts/PieChart";
 import LineChart from "./components/charts/LineChart";

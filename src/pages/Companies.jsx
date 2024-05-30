@@ -42,12 +42,14 @@ export default function Companies() {
               <IoIosCloseCircle
                 color="red"
                 size={45}
+                className="cursor-pointer"
                 onClick={() => setIsForm(false)}
               />
             ) : (
               <IoIosAddCircle
                 size={45}
                 color="#003262"
+                className="cursor-pointer"
                 onClick={() => setIsForm(true)}
               />
             )}
