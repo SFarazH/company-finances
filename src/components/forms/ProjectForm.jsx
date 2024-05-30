@@ -1,21 +1,78 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
-const ProjectForm = () => {
+const ProjectForm = ({ setTemp, setIsForm }) => {
+  const [companyNames, setCompanyNames] = useState([]);
+  const [success, setSuccess] = useState(false);
+  const getCompanyNames = async () => {
+    const config = {
+      url: "http://localhost:4000/client/get",
+      method: "get",
+      params: {
+        onlyNames: true,
+      },
+    };
+    axios(config)
+      .then((res) => setCompanyNames(res.data))
+      .catch((e) => console.error(e));
+  };
+
+  const addProject = async (formData) => {
+    const config = {
+      url: "http://localhost:4000/project/add",
+      method: "post",
+      data: formData,
+    };
+    axios(config).then((res) => {
+      setSuccess(true);
+      setTimeout(() => {
+        setTemp((prev) => prev + 1);
+        setIsForm(false);
+      }, 1500);
+    });
+  };
+
+  useEffect(() => {
+    getCompanyNames();
+  }, []);
+
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      TDS: 0,
+      GSTPercent: 18,
+    },
+  });
 
   const onSubmit = (data) => {
     console.log(data);
+    // addProject(data);
   };
 
   return (
     <div className="max-w-md mx-auto p-6 bg-white shadow-md rounded-md">
       <h2 className="text-xl font-bold mb-4">Project Form</h2>
       <form onSubmit={handleSubmit(onSubmit)}>
+        <div className="mb-4">
+          <label className="block text-gray-700">Company</label>
+          <select
+            {...register("clientId", { required: true })}
+            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm"
+          >
+            <option value="">Select a company</option>
+            {companyNames.map((companyName) => (
+              <option value={companyName._id}>{companyName.companyName}</option>
+            ))}
+          </select>
+          {errors.clientId && (
+            <span className="text-red-600">This field is required</span>
+          )}
+        </div>
+
         <div className="mb-4">
           <label className="block text-gray-700">Project Type</label>
           <input
@@ -41,7 +98,7 @@ const ProjectForm = () => {
         <div className="mb-4">
           <label className="block text-gray-700">Project Consultant Name</label>
           <input
-            {...register("projectConsultant.name", { required: true })}
+            {...register("projectConsultant.name", { required: false })}
             className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm"
           />
           {errors.projectConsultant?.name && (
@@ -52,12 +109,15 @@ const ProjectForm = () => {
         <div className="mb-4">
           <label className="block text-gray-700">Project Consultant Fees</label>
           <input
-            {...register("projectConsultant.fees", { required: true })}
+            {...register("projectConsultant.price", {
+              // required: false,
+              min: 0,
+            })}
             type="number"
             className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm"
           />
-          {errors.projectConsultant?.fees && (
-            <span className="text-red-600">This field is required</span>
+          {errors.projectConsultant?.price && (
+            <span className="text-red-600">Please enter valid value!</span>
           )}
         </div>
 
@@ -131,6 +191,11 @@ const ProjectForm = () => {
             <span className="text-red-600">This field is required</span>
           )}
         </div>
+        {success && (
+          <p className="text-green-500 font-semibold font-lg text-center pb-4">
+            Project added successfully!
+          </p>
+        )}
 
         <button
           type="submit"
