@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Spinner from "../components/Spinner";
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route, Link, useNavigate } from "react-router-dom";
 import ExpenseCategory from "../components/ExpenseCategory";
 import { IoAddCircle, IoCloseCircle } from "react-icons/io5";
 import ExpenseForm from "../components/forms/ExpenseForm";
@@ -8,6 +8,7 @@ import ExpenseForm from "../components/forms/ExpenseForm";
 export default function Expenses() {
   // cateory = salary , project expenses , snacks , bills , misc
   const [isForm, setIsForm] = useState(false);
+  const navigate = useNavigate();
   const category = {
     salary: "Salary",
     project: "Project Expenses",
@@ -41,7 +42,10 @@ export default function Expenses() {
               />
             ) : (
               <IoAddCircle
-                onClick={() => setIsForm(true)}
+                onClick={() => {
+                  navigate("/expenses");
+                  setIsForm(true);
+                }}
                 size={40}
                 color="green"
                 className="cursor-pointer"
@@ -54,7 +58,7 @@ export default function Expenses() {
               element={
                 isForm ? (
                   <>
-                    <ExpenseForm setIsForm={setIsForm}/>
+                    <ExpenseForm setIsForm={setIsForm} />
                   </>
                 ) : (
                   <div className="grid grid-cols-5 gap-4">

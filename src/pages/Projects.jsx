@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { FaCheck } from "react-icons/fa";
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route, Link, useNavigate } from "react-router-dom";
 import ProjectNames from "../components/ProjectNames";
 import ProjectCard from "../components/ProjectCard";
 import Spinner from "../components/Spinner";
@@ -9,6 +9,7 @@ import { IoIosAddCircle, IoIosCloseCircle } from "react-icons/io";
 import ProjectForm from "../components/forms/ProjectForm";
 
 export default function Projects() {
+  const navigate = useNavigate();
   const [isForm, setIsForm] = useState(false);
   const [projects, setProjects] = useState([]);
   const [temp, setTemp] = useState(0);
@@ -69,7 +70,10 @@ export default function Projects() {
                 size={45}
                 color="#003262"
                 className="cursor-pointer"
-                onClick={() => setIsForm(true)}
+                onClick={() => {
+                  setIsForm(true);
+                  navigate("/projects");
+                }}
               />
             )}
           </div>
