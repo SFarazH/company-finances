@@ -11,10 +11,10 @@ export default function PurchaseCard() {
   const { purchaseId } = useParams();
   const getPurchaseById = async (id) => {
     const config = {
-      url: "http://localhost:4000/purchase/pId",
+      url: "http://localhost:4000/purchase/id",
       method: "get",
       params: {
-        purchaseId: id,
+        projectPurchaseId: id,
       },
     };
     axios(config)
@@ -33,7 +33,6 @@ export default function PurchaseCard() {
     axios(config)
       .then((res) => {
         setPayments(res.data);
-        console.log(res.data);
       })
       .catch((e) => console.error(e));
   };
@@ -101,11 +100,11 @@ export default function PurchaseCard() {
                   </p>
                 </div>
                 <div className="flex justify-between text-lg mt-4">
-                      <p className="">Liability</p>
-                      <p className="text-xl font-semibold text-red-500">
-                        {purchaseData.paymentLiability}
-                      </p>
-                    </div>
+                  <p className="">Liability</p>
+                  <p className="text-xl font-semibold text-red-500">
+                    {purchaseData.paymentLiability}
+                  </p>
+                </div>
               </div>
               <div className="w-5/12 bg-gray-100 p-2 rounded-lg">
                 <div className="text-lg font-semibold mb-4">Payments</div>
@@ -121,7 +120,6 @@ export default function PurchaseCard() {
                         </div>
                       </>
                     ))}
-                    
                   </>
                 ) : (
                   <p>No payment data</p>

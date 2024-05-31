@@ -7,7 +7,6 @@ import { Routes, Route, Link, useNavigate } from "react-router-dom";
 
 export default function Purchases() {
   const [purchases, setPurchases] = useState();
-  const [purchaseId, setPurchaseId] = useState(null);
 
   const getPurchaseNames = async () => {
     const config = {
@@ -26,19 +25,6 @@ export default function Purchases() {
 
     return () => clearTimeout(timer);
   }, []);
-
-  const getPurchaseById = async (id) => {
-    const config = {
-      url: "http://localhost:4000/purchase/pId",
-      method: "get",
-      params: {
-        purchaseId: id,
-      },
-    };
-    axios(config)
-      .then((res) => setPurchaseId(res.data))
-      .catch((e) => console.error(e));
-  };
   useEffect(() => {
     getPurchaseNames();
   }, []);
@@ -61,7 +47,7 @@ export default function Purchases() {
                         <div
                           className="border rounded-full border-gray-900 my-4 flex items-center text-lg justify-between"
                           onClick={() => {
-                            getPurchaseById(purchase._id);
+                            // getPurchaseById(purchase._id);
                           }}
                         >
                           <p className="bg-indigo-950 rounded-l-full p-4 w-1/5 text-white font-semibold text-white">
@@ -80,10 +66,7 @@ export default function Purchases() {
                 </div>
               }
             ></Route>
-            <Route
-              path=":purchaseId"
-              element={<PurchaseCard purchaseId={purchaseId} />}
-            ></Route>
+            <Route path=":purchaseId" element={<PurchaseCard />}></Route>
           </Routes>
         </div>
       )}
