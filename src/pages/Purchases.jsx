@@ -4,10 +4,17 @@ import { FaRupeeSign } from "react-icons/fa";
 import PurchaseCard from "../components/PurchaseCard";
 import Spinner from "../components/Spinner";
 import { Routes, Route, Link, useNavigate } from "react-router-dom";
+import { IoAddCircle, IoCloseCircle } from "react-icons/io5";
+import PurchaseForm from "../components/forms/PurchaseForm";
 
 export default function Purchases() {
   const [purchases, setPurchases] = useState();
-
+  const [isForm, setIsForm] = useState(false);
+  const [queryParams, setQueryParams] = useState({
+    fromDate: "",
+    toDate: "",
+    projectId: "",
+  });
   const getPurchaseNames = async () => {
     const config = {
       url: "http://localhost:4000/purchase/all",
@@ -35,13 +42,35 @@ export default function Purchases() {
         <Spinner />
       ) : (
         <div className="px-8">
-          <p className="text-3xl font-semibold my-4">Purchases</p>
+          <div className="flex justify-between items-center">
+            <p className="text-3xl font-semibold my-4">Purchases</p>
+            {isForm ? (
+              <IoCloseCircle
+                onClick={() => setIsForm(false)}
+                size={40}
+                color="red"
+                className="cursor-pointer"
+              />
+            ) : (
+              <IoAddCircle
+                onClick={() => {
+                  setIsForm(true);
+                }}
+                size={40}
+                color="green"
+                className="cursor-pointer"
+              />
+            )}
+          </div>
           <Routes>
             <Route
               path="/"
               element={
                 <div>
-                  {purchases &&
+                  {isForm ? (
+                    <PurchaseForm setIsForm={setIsForm} />
+                  ) : (
+                    purchases &&
                     purchases.map((purchase) => (
                       <Link to={`/purchases/${purchase._id}`}>
                         <div
@@ -62,7 +91,8 @@ export default function Purchases() {
                           </p>
                         </div>
                       </Link>
-                    ))}
+                    ))
+                  )}
                 </div>
               }
             ></Route>
