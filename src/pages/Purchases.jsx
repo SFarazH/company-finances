@@ -1,9 +1,9 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { FaRupeeSign } from "react-icons/fa";
-import PurchaseCard from "../components/PurchaseCard";
+import PurchaseCard from "../components/cards/PurchaseCard";
 import Spinner from "../components/Spinner";
-import { Routes, Route, Link, useNavigate } from "react-router-dom";
+import { Routes, Route, Link } from "react-router-dom";
 import { IoAddCircle, IoCloseCircle } from "react-icons/io5";
 import PurchaseForm from "../components/forms/PurchaseForm";
 

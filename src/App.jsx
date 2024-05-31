@@ -1,5 +1,4 @@
-import Dashboard from "./Dashboard";
-import CompanyForm from "./components/CompanyForm";
+import Dashboard from "./pages/Dashboard";
 import KPI from "./components/KPI";
 import SideMenu from "./components/SideMenu";
 import Companies from "./pages/Companies";

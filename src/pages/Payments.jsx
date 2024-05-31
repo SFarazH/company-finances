@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-import PaymentCard from "../components/PaymentCard";
+import PaymentCard from "../components/cards/PaymentCard";
 import PaymentForm from "../components/forms/PaymentForm";
 import { FaCheck, FaExternalLinkAlt } from "react-icons/fa";
 import Spinner from "../components/Spinner";

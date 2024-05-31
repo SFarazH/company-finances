@@ -1,6 +1,6 @@
 import axios from "axios";
 import { React, useEffect, useState } from "react";
-import CompanyCard from "../components/CompanyCard";
+import CompanyCard from "../components/cards/CompanyCard";
 import Spinner from "../components/Spinner";
 import { IoIosAddCircle, IoIosCloseCircle } from "react-icons/io";
 import CompanyForm from "../components/forms/CompanyForm";

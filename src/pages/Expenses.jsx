@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Spinner from "../components/Spinner";
 import { Routes, Route, Link, useNavigate } from "react-router-dom";
-import ExpenseCategory from "../components/ExpenseCategory";
+import ExpenseCategory from "../components/cards/ExpenseCategory";
 import { IoAddCircle, IoCloseCircle } from "react-icons/io5";
 import ExpenseForm from "../components/forms/ExpenseForm";
 

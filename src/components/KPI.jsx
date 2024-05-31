@@ -1,6 +1,6 @@
 import { React, useEffect, useState } from "react";
 import axios from "axios";
-import InsightCard from "./InsightsCard";
+import InsightCard from "./cards/InsightsCard";
 import { FaBuilding, FaRupeeSign, FaShoppingCart } from "react-icons/fa";
 import { MdAssignment } from "react-icons/md";
 
