@@ -4,6 +4,7 @@ import axios from "axios";
 import { IoArrowBackCircle } from "react-icons/io5";
 import { FaCheck } from "react-icons/fa";
 import { useNavigate, useParams } from "react-router-dom";
+import SetQuery from "../SetQuery";
 
 const ExpenseCategory = () => {
   const category = {
@@ -20,13 +21,6 @@ const ExpenseCategory = () => {
   const navigate = useNavigate();
   const [expenseData, setExpenses] = useState(null);
   const { expenseCategory } = useParams();
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setQueryParams({
-      ...queryParams,
-      [name]: value,
-    });
-  };
   const [temp, setTemp] = useState(0);
 
   const getExpenses = async () => {
@@ -63,55 +57,7 @@ const ExpenseCategory = () => {
           {category[expenseCategory]}
         </p>
       </div>
-      <form
-        className="flex justify-between items-center gap-4 p-4 bg-gray-100 rounded-lg "
-        onSubmit={(e) => {
-          e.preventDefault();
-          console.log(queryParams);
-          setTemp((prev) => prev + 1);
-        }}
-      >
-        <div className="flex flex-col w-1/5">
-          <label
-            htmlFor="fromDate"
-            className="text-sm font-medium text-gray-700"
-          >
-            From Date
-          </label>
-          <input
-            type="date"
-            id="fromDate"
-            name="fromDate"
-            value={queryParams.fromDate}
-            onChange={handleChange}
-            className="mt-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-        </div>
-
-        <div className="flex flex-col w-1/5">
-          <label htmlFor="toDate" className="text-sm font-medium text-gray-700">
-            To Date
-          </label>
-          <input
-            type="date"
-            id="toDate"
-            name="toDate"
-            onChange={handleChange}
-            value={queryParams.toDate}
-            className="mt-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-        </div>
-
-        <button type="submit" className="">
-          <FaCheck className="p-2" color="green" size="2.5em" />
-        </button>
-        <button
-          onClick={() => setQueryParams({ fromDate: "", toDate: "" })}
-          className="p-2 rounded-lg bg-red-600 text-white"
-        >
-          Clear
-        </button>
-      </form>
+      <SetQuery setQueryParams={setQueryParams} setTemp={setTemp} />
       <div className="">
         {expenseData &&
           expenseData.map((expense) => (
