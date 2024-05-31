@@ -50,7 +50,7 @@ const ProjectForm = ({ setTemp, setIsForm }) => {
 
   const onSubmit = (data) => {
     console.log(data);
-    // addProject(data);
+    addProject(data);
   };
 
   return (
@@ -75,10 +75,26 @@ const ProjectForm = ({ setTemp, setIsForm }) => {
 
         <div className="mb-4">
           <label className="block text-gray-700">Project Type</label>
-          <input
-            {...register("projectType", { required: true })}
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm"
-          />
+          <div className="mt-1">
+            <label className="inline-flex items-center">
+              <input
+                {...register("projectType", { required: true })}
+                type="radio"
+                value="software"
+                className="form-radio h-4 w-4 text-blue-600 transition duration-150 ease-in-out"
+              />
+              <span className="ml-2">Software</span>
+            </label>
+            <label className="inline-flex items-center ml-6">
+              <input
+                {...register("projectType", { required: true })}
+                type="radio"
+                value="hardware"
+                className="form-radio h-4 w-4 text-blue-600 transition duration-150 ease-in-out"
+              />
+              <span className="ml-2">Hardware</span>
+            </label>
+          </div>
           {errors.projectType && (
             <span className="text-red-600">This field is required</span>
           )}
