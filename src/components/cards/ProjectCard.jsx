@@ -1,21 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { FaCircle } from "react-icons/fa";
+import { FaCircle, FaLaptop } from "react-icons/fa";
 import { PiCpuFill } from "react-icons/pi";
-import { FaLaptop } from "react-icons/fa";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { IoArrowBackCircle } from "react-icons/io5";
-import { useNavigate } from "react-router-dom";
-
+import { formatDate } from "../functions";
 import axios from "axios";
 
 export default function ProjectCard(props) {
   let navigate = useNavigate();
-  function formatDate(isoString) {
-    const date = new Date(isoString);
-
-    const options = { day: "numeric", month: "short", year: "numeric" };
-    return date.toLocaleDateString("en-GB", options);
-  }
   const PriceList = (props) => {
     return (
       <div
@@ -175,7 +167,9 @@ export default function ProjectCard(props) {
                   <p className="text-lg py-2 font-semibold">Purchases</p>
                   {data.projectPurchasesArray.map((purchase) => (
                     <Link to={`/purchases/${purchase.projectPurcaseId}`}>
-                      <p className="text-lg font-semibold">{purchase.productName}</p>
+                      <p className="text-lg font-semibold">
+                        {purchase.productName}
+                      </p>
                     </Link>
                   ))}
                 </div>

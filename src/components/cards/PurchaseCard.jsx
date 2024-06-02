@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { FaRupeeSign } from "react-icons/fa";
 import { IoArrowBackCircle } from "react-icons/io5";
 import { useNavigate, useParams } from "react-router-dom";
+import { formatDate } from "../functions";
 
 export default function PurchaseCard() {
   const [payments, setPayments] = useState(null);
@@ -36,12 +37,7 @@ export default function PurchaseCard() {
       })
       .catch((e) => console.error(e));
   };
-  function formatDate(isoString) {
-    const date = new Date(isoString);
-
-    const options = { day: "numeric", month: "short", year: "numeric" };
-    return date.toLocaleDateString("en-GB", options);
-  }
+  
   const ProgressBar = ({ progressPercentage }) => {
     return (
       <div className="h-4 w-full bg-gray-300 rounded-xl overflow-hidden border-black">

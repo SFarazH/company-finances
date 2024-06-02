@@ -1,6 +1,7 @@
 import React from "react";
 import { FaRupeeSign, FaExternalLinkAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { formatDate } from "../functions";
 
 export default function PaymentCard(props) {
   const p = {
@@ -11,12 +12,6 @@ export default function PaymentCard(props) {
     receivedAmount: 10000,
     _id: "66460b28ac8e6742981b96cc",
   };
-  function formatDate(isoString) {
-    const date = new Date(isoString);
-
-    const options = { day: "numeric", month: "short", year: "numeric" };
-    return date.toLocaleDateString("en-GB", options);
-  }
 
   return (
     <>

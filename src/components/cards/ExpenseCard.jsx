@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { PiMicrophoneSlash } from "react-icons/pi";
+import { formatDate } from "../functions";
 
 export default function ExpenseCard(props) {
   console.log(props);
@@ -20,13 +21,6 @@ export default function ExpenseCard(props) {
       console.error(error);
     }
   };
-
-  function formatDate(isoString) {
-    const date = new Date(isoString);
-
-    const options = { day: "numeric", month: "short", year: "numeric" };
-    return date.toLocaleDateString("en-GB", options);
-  }
 
   useEffect(() => {
     props.expenseCategory === "project" && getProjDetails();
