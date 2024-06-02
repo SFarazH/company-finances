@@ -14,9 +14,12 @@ export default function Purchases() {
   const [isForm, setIsForm] = useState(false);
   const [queryParams, setQueryParams] = useState({});
 
-  useEffect(() => {
-    console.log(queryParams);
-  }, [temp]);
+  function formatDate(isoString) {
+    const date = new Date(isoString);
+
+    const options = { day: "numeric", month: "short", year: "numeric" };
+    return date.toLocaleDateString("en-GB", options);
+  }
 
   const getPurchaseNames = async () => {
     const config = {
@@ -82,13 +85,18 @@ export default function Purchases() {
                       {purchases &&
                         purchases.map((purchase) => (
                           <Link to={`/purchases/${purchase._id}`}>
-                            <div className="border rounded-full border-gray-900 my-4 flex items-center text-lg justify-between">
-                              <p className="bg-indigo-950 rounded-l-full p-4 w-1/5 text-white font-semibold text-white">
-                                {purchase.productName}
-                              </p>
-                              <p className="rounded-l-full w-1/5 text-lg">
-                                {purchase.projectName}
-                              </p>
+                            <div className="rounded-xl border p-4 py-2 border-gray-900 my-4 flex items-center text-lg justify-between">
+                              <div>
+                                <p className="rounded-full bg-indigo-900 text-white w-fit p-1.5 px-2">
+                                  {formatDate(purchase.purchaseDate)}
+                                </p>
+                                <p className="text-xl mt-2 font-semibold ">
+                                  {purchase.productName} -{" "}
+                                  <span className="text-base">
+                                    ({purchase.projectName})
+                                  </span>
+                                </p>
+                              </div>
 
                               <p className="text-lg font-semibold bg-green-600 p-2 m-2 w-fit rounded-full text-white flex items-center gap-1">
                                 <FaRupeeSign /> {purchase.finalPriceProduct}
