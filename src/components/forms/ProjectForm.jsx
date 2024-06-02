@@ -49,8 +49,20 @@ const ProjectForm = ({ setTemp, setIsForm }) => {
   });
 
   const onSubmit = (data) => {
-    console.log(data);
-    addProject(data);
+    // Convert relevant fields to numbers
+    const convertedData = {
+      ...data,
+      projectConsultant: {
+        ...data.projectConsultant,
+        price: parseFloat(data.projectConsultant?.price || 0),
+      },
+      finalPrice: parseFloat(data.finalPrice),
+      GSTPercent: parseFloat(data.GSTPercent),
+      TDS: parseFloat(data.TDS),
+    };
+
+    console.log(convertedData);
+    addProject(convertedData);
   };
 
   return (

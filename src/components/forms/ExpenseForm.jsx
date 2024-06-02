@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 
 const ExpenseForm = ({ setIsForm }) => {
   const [projectNames, setProjectNames] = useState([]);
@@ -13,10 +13,12 @@ const ExpenseForm = ({ setIsForm }) => {
     watch,
     setValue,
     formState: { errors },
+    control,
   } = useForm();
 
   const onSubmit = (data) => {
     addExpense(data);
+    // console.log(data);
   };
 
   const getProjectsName = async () => {
@@ -30,9 +32,16 @@ const ExpenseForm = ({ setIsForm }) => {
         console.log(e);
       });
   };
+
   useEffect(() => {
     getProjectsName();
   }, []);
+
+  useEffect(() => {
+    if (watch("expenseCategory") !== "project") {
+      setValue("projectPurchaseId", null);
+    }
+  }, [watch("expenseCategory"), setValue]);
 
   const addExpense = async (data) => {
     const config = {
@@ -62,6 +71,11 @@ const ExpenseForm = ({ setIsForm }) => {
     { name: "Miscellaneous", value: "misc", id: 5 },
   ];
 
+  const getLiability = (id) => {
+    const projectL = projectNames.find((p) => p._id === id);
+    return projectL ? projectL.paymentLiability : null;
+  };
+
   return (
     <>
       <div className="max-w-md mx-auto p-6 bg-white shadow-md rounded-md">
@@ -85,8 +99,8 @@ const ExpenseForm = ({ setIsForm }) => {
             )}
           </div>
 
-          {watch("expenseCategory") === "project" ? (
-            <div className="mt-4">
+          {watch("expenseCategory") === "project" && (
+            <div className="mb-4">
               <label className="block text-gray-700">Product Name</label>
               <select
                 {...register("projectPurchaseId", { required: true })}
@@ -94,15 +108,15 @@ const ExpenseForm = ({ setIsForm }) => {
               >
                 <option value="">Select a company</option>
                 {projectNames.map((product) => (
-                  <option value={product._id}>{product.productName}</option>
+                  <option key={product._id} value={product._id}>
+                    {product.productName}
+                  </option>
                 ))}
               </select>
               {errors.projectPurchaseId && (
                 <span className="text-red-600">This field is required</span>
               )}
             </div>
-          ) : (
-            setValue("projectPurchaseId", null)
           )}
 
           <div className="mb-4">
@@ -116,6 +130,17 @@ const ExpenseForm = ({ setIsForm }) => {
               <span className="text-red-600">This field is required</span>
             )}
           </div>
+
+          {watch("projectPurchaseId") && (
+            <div className="mb-4">
+              <p className="text-lg font-semibold text-center">
+                Project Liability :{" "}
+                <span className="text-red-500">
+                  {getLiability(watch("projectPurchaseId"))}
+                </span>
+              </p>
+            </div>
+          )}
 
           <div className="mb-4">
             <label className="block text-gray-700">Expense Date</label>
@@ -153,7 +178,7 @@ const ExpenseForm = ({ setIsForm }) => {
           <div className="mb-4">
             <label className="block text-gray-700">Bill ID</label>
             <input
-              placeholder="Name"
+              placeholder="Bill ID"
               {...register("billId", { required: false })}
               className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm"
             />
@@ -166,7 +191,6 @@ const ExpenseForm = ({ setIsForm }) => {
             <label className="block text-gray-700">Expense Comments</label>
             <textarea
               {...register("expenseComments", { required: true })}
-              type="text-area"
               className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm"
             />
             {errors.expenseComments && (
@@ -174,13 +198,13 @@ const ExpenseForm = ({ setIsForm }) => {
             )}
           </div>
           {success && (
-            <p className="text-green-500 font-semibold font-lg text-center pb-4">
+            <p className="text-green-500 font-semibold text-center pb-4">
               Expense added successfully!
             </p>
           )}
 
           {error && (
-            <p className="text-red-500 font-semibold font-lg text-center pb-4">
+            <p className="text-red-500 font-semibold text-center pb-4">
               {errorMsg}
             </p>
           )}
