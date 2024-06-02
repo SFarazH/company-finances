@@ -48,8 +48,8 @@ const PurchaseForm = ({ setIsForm }) => {
         setSuccess(true);
         setTimeout(() => {
           setIsForm(false);
-        }, 1500);
-        console.log(res.data);
+        }, 2000);
+        // console.log(res.data);
       })
       .catch((e) => {
         setErrorMsg(e.response.data.error);
@@ -128,7 +128,7 @@ const PurchaseForm = ({ setIsForm }) => {
 
           {success && (
             <p className="text-green-500 font-semibold font-lg text-center pb-4">
-              Payment added successfully!
+              Project Purchase added successfully!
             </p>
           )}
 
