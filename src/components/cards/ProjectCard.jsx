@@ -37,7 +37,6 @@ export default function ProjectCard(props) {
 
   const [projectData, setProjectData] = useState(null);
   const [paymentsData, setPaymentData] = useState(null);
-
   const [data, setData] = useState(null);
 
   const fetchProjectData = async (id) => {
@@ -143,7 +142,7 @@ export default function ProjectCard(props) {
 
                   <div className="mt-4">
                     {data.payments.map((pay) => (
-                      <div className="flex justify-between">
+                      <div key={pay._id} className="flex justify-between">
                         <p>{formatDate(pay.paymentDate)}</p>
                         <p className="font-semibold font-lg">
                           {pay.receivedAmount}
@@ -166,7 +165,10 @@ export default function ProjectCard(props) {
                 <div className="p-2 px-3 bg-red-100 mt-3 rounded-lg">
                   <p className="text-lg py-2 font-semibold">Purchases</p>
                   {data.projectPurchasesArray.map((purchase) => (
-                    <Link to={`/purchases/${purchase.projectPurcaseId}`}>
+                    <Link
+                      key={purchase.projectPurcaseId}
+                      to={`/purchases/${purchase.projectPurcaseId}`}
+                    >
                       <p className="text-lg font-semibold">
                         {purchase.productName}
                       </p>
@@ -179,6 +181,7 @@ export default function ProjectCard(props) {
                 <div className=" bg-gray-100 p-2 px-3 rounded-lg">
                   <p className="text-lg py-1 font-semibold">Finances</p>
                   <PriceList
+                    
                     category="Net Receivable"
                     price={data.finalPrice}
                   />

@@ -29,6 +29,7 @@ const CompanyForm = ({ setIsForm, setTemp }) => {
       companyPOC: companyPOC,
       companyGSTN: data.companyGSTNumber,
     };
+    console.log(res);
     const config = {
       url: "http://localhost:4000/client/add",
       method: "post",

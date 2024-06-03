@@ -15,6 +15,7 @@ const PurchaseForm = ({ setIsForm }) => {
   } = useForm();
 
   const onSubmit = (data) => {
+    data.finalPriceProduct = parseFloat(data.finalPriceProduct);
     console.log(data);
     addProductPurchase(data);
   };

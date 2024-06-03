@@ -17,8 +17,9 @@ const ExpenseForm = ({ setIsForm }) => {
   } = useForm();
 
   const onSubmit = (data) => {
+    data.expenseAmount = parseFloat(data.expenseAmount);
     addExpense(data);
-    // console.log(data);
+  // console.log(data);
   };
 
   const getProjectsName = async () => {

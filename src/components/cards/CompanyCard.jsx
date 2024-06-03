@@ -66,7 +66,10 @@ export default function CompanyCard() {
               <div className="mt-4 bg-gray-100 w-2/5 p-2 rounded-lg">
                 <p className="font-semibold text-xl pb-2">Projects</p>
                 {companyData.projects.map((project) => (
-                  <Link to={`/projects/${project.projectId}`}>
+                  <Link
+                    key={project.projectId}
+                    to={`/projects/${project.projectId}`}
+                  >
                     <p className="font-semibold text-lg my-1 hover:text-indigo-800 ">
                       {project.projectName}
                     </p>

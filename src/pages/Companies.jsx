@@ -74,7 +74,6 @@ export default function Companies() {
                           <div key={client._id} className="my-2">
                             <div
                               className="border p-3 rounded-full text-xl cursor-pointer flex justify-between"
-                              onClick={() => console.log(client._id)}
                             >
                               {client.companyName}
                             </div>

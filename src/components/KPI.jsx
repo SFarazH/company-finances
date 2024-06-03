@@ -47,7 +47,7 @@ export default function KPI() {
     <>
       <div className="flex gap-8 px-8 bg-[#81523F] text-[#E8EEF2]">
         {kpi.map((k) => (
-          <InsightCard {...k} />
+          <InsightCard key={k.id} {...k} />
         ))}
       </div>
     </>

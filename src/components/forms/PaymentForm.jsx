@@ -15,6 +15,7 @@ const PaymentForm = ({ setIsForm, setTemp }) => {
   } = useForm();
 
   const onSubmit = (data) => {
+    data.amount = parseFloat(data.amount);
     console.log(data);
     addPayment(data);
   };
