@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
-const PaymentForm = ({ setIsForm }) => {
+const PaymentForm = ({ setIsForm, setTemp }) => {
   const [projectNames, setProjectNames] = useState([]);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
@@ -49,6 +49,7 @@ const PaymentForm = ({ setIsForm }) => {
       .then((res) => {
         setError(false);
         setSuccess(true);
+        setTemp((prev) => (prev += 1));
         setTimeout(() => {
           setIsForm(false);
         }, 1500);

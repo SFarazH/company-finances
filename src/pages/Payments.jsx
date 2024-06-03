@@ -71,7 +71,7 @@ export default function Payments() {
             )}
           </div>
           {isForm ? (
-            <PaymentForm setIsForm={setIsForm} />
+            <PaymentForm setIsForm={setIsForm} setTemp={setTemp} />
           ) : (
             <>
               <SetQuery
