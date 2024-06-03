@@ -35,15 +35,22 @@ export default function Projects() {
   });
 
   useEffect(() => {
-    const config = {
-      url: "https://obb-finance-backend-1.onrender.com/project/all",
-      method: "get",
-      params: { ...queryParams },
+    const fetchProjects = async () => {
+      try {
+        const config = {
+          url: "https://obb-finance-backend-1.onrender.com/project/all",
+          method: "get",
+          params: { ...queryParams },
+        };
+        const res = await axios(config);
+        setProjects(res.data);
+      } catch (error) {
+        console.error(error);
+      }
     };
-    axios(config)
-      .then((res) => setProjects(res.data))
-      .catch((e) => console.error(e));
-  }, [temp]);
+
+    fetchProjects();
+  }, [temp, queryParams]);
 
   return (
     <>
@@ -95,7 +102,10 @@ export default function Projects() {
                 )
               }
             />
-            <Route path=":projectId" element={<ProjectCard />} />
+            <Route
+              path=":projectId"
+              element={<ProjectCard setTemp={setTemp} />}
+            />
           </Routes>
         </div>
       )}

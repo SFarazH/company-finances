@@ -6,11 +6,11 @@ import { IoArrowBackCircle } from "react-icons/io5";
 import { formatDate } from "../functions";
 import axios from "axios";
 
-export default function ProjectCard() {
+export default function ProjectCard({ setTemp }) {
   const navigate = useNavigate();
   const [projectData, setProjectData] = useState(null);
   const [paymentsData, setPaymentData] = useState(null);
-  const [temp, setTemp] = useState(0);
+  const [status, setStatus] = useState(0);
   const [data, setData] = useState(null);
   const { projectId } = useParams();
 
@@ -28,6 +28,7 @@ export default function ProjectCard() {
       </div>
     );
   };
+
   const ProgressBar = ({ progressPercentage }) => {
     return (
       <div className="h-4 w-full bg-gray-300 rounded-xl overflow-hidden border-black">
@@ -40,6 +41,7 @@ export default function ProjectCard() {
       </div>
     );
   };
+
   const fetchProjectData = async (id) => {
     try {
       const projectConfig = {
@@ -61,6 +63,7 @@ export default function ProjectCard() {
       console.error(error);
     }
   };
+
   const updateStatus = async (id) => {
     const config = {
       url: "https://obb-finance-backend-1.onrender.com/project/update-status",
@@ -72,7 +75,10 @@ export default function ProjectCard() {
     axios(config)
       .then((res) => {
         console.log(res.data);
-        setTemp((prev) => prev + 1);
+        setStatus((prev) => prev + 1);
+        setTimeout(() => {
+          setTemp((prev) => prev + 1);
+        }, 1000);
       })
       .catch((e) => console.error(e));
   };
@@ -82,9 +88,10 @@ export default function ProjectCard() {
       setData({ ...projectData, payments: paymentsData });
     }
   }, [projectData, paymentsData]);
+
   useEffect(() => {
     fetchProjectData(projectId);
-  }, [temp]);
+  }, [status, projectId]);
 
   return (
     <>
@@ -206,6 +213,7 @@ export default function ProjectCard() {
                   />
                   {Object.entries(data.GST).map(([key, value]) => (
                     <PriceList
+                      key={key}
                       category={`${key} - ${value}%`}
                       price={data.finalPrice * (value / 100)}
                     />
