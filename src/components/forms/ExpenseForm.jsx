@@ -79,14 +79,16 @@ const ExpenseForm = ({ setIsForm }) => {
 
   return (
     <>
-      <div className="max-w-md mx-auto p-6 bg-white shadow-md rounded-md">
-        <h2 className="text-xl font-bold mb-4">Project Form</h2>
+      <div className="max-w-xl mx-auto mb-8 pb-4 shadow-md rounded-md p-4">
+        <p className="text-center text-xl font-semibold mb-4">Add Expense</p>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-4">
-            <label className="block text-gray-700">Expense Category</label>
+            <label className="block text-md font-medium text-gray-700">
+              Expense Category
+            </label>
             <select
               {...register("expenseCategory", { required: true })}
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm"
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-md"
             >
               <option value="">Select a category</option>
               {expenseCategories.map((expense) => (
@@ -102,10 +104,12 @@ const ExpenseForm = ({ setIsForm }) => {
 
           {watch("expenseCategory") === "project" && (
             <div className="mb-4">
-              <label className="block text-gray-700">Product Name</label>
+              <label className="block text-md font-medium text-gray-700">
+                Product Name
+              </label>
               <select
                 {...register("projectPurchaseId", { required: true })}
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm"
+                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-md"
               >
                 <option value="">Select a company</option>
                 {projectNames.map((product) => (
@@ -121,11 +125,13 @@ const ExpenseForm = ({ setIsForm }) => {
           )}
 
           <div className="mb-4">
-            <label className="block text-gray-700">Expense Amount</label>
+            <label className="block text-md font-medium text-gray-700">
+              Expense Amount
+            </label>
             <input
               {...register("expenseAmount", { required: true })}
               type="number"
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm"
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-md"
             />
             {errors.expenseAmount && (
               <span className="text-red-600">This field is required</span>
@@ -144,11 +150,13 @@ const ExpenseForm = ({ setIsForm }) => {
           )}
 
           <div className="mb-4">
-            <label className="block text-gray-700">Expense Date</label>
+            <label className="block text-md font-medium text-gray-700">
+              Expense Date
+            </label>
             <input
               {...register("expenseDate", { required: true })}
               type="date"
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm"
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-md"
             />
             {errors.expenseDate && (
               <span className="text-red-600">This field is required</span>
@@ -156,11 +164,13 @@ const ExpenseForm = ({ setIsForm }) => {
           </div>
 
           <div className="mb-4">
-            <label className="block text-gray-700">Point of Contact</label>
+            <label className="block text-md font-medium text-gray-700">
+              Point of Contact
+            </label>
             <input
               placeholder="Name"
               {...register("expensePOC.name", { required: false })}
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm"
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-md"
             />
             {errors.expensePOC?.name && (
               <span className="text-red-600">This field is required</span>
@@ -169,7 +179,7 @@ const ExpenseForm = ({ setIsForm }) => {
               {...register("expensePOC.mobile", { required: false })}
               type="number"
               placeholder="Number"
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm"
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-md"
             />
             {errors.expensePOC?.mobile && (
               <span className="text-red-600">This field is required</span>
@@ -177,11 +187,13 @@ const ExpenseForm = ({ setIsForm }) => {
           </div>
 
           <div className="mb-4">
-            <label className="block text-gray-700">Bill ID</label>
+            <label className="block text-md font-medium text-gray-700">
+              Bill ID
+            </label>
             <input
               placeholder="Bill ID"
               {...register("billId", { required: false })}
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm"
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-md"
             />
             {errors.billId && (
               <span className="text-red-600">This field is required</span>
@@ -189,10 +201,12 @@ const ExpenseForm = ({ setIsForm }) => {
           </div>
 
           <div className="mb-4">
-            <label className="block text-gray-700">Expense Comments</label>
+            <label className="block text-md font-medium text-gray-700">
+              Expense Comments
+            </label>
             <textarea
               {...register("expenseComments", { required: true })}
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm"
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-md"
             />
             {errors.expenseComments && (
               <span className="text-red-600">This field is required</span>
@@ -212,7 +226,7 @@ const ExpenseForm = ({ setIsForm }) => {
 
           <button
             type="submit"
-            className="w-full bg-blue-500 text-white py-2 px-4 rounded-md"
+            className="w-fit flex mx-auto py-2 px-4 border border-transparent rounded-md shadow-sm text-md font-medium text-white bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
             Submit
           </button>

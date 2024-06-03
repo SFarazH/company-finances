@@ -53,7 +53,7 @@ const CompanyForm = ({ setIsForm, setTemp }) => {
     : [];
 
   return (
-    <div className="max-w-xl mx-auto pb-8">
+    <div className="max-w-xl mx-auto mb-8 pb-4 shadow-md rounded-md p-4">
       <p className="text-center text-xl font-semibold mb-4">Add Company</p>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
@@ -187,7 +187,7 @@ const CompanyForm = ({ setIsForm, setTemp }) => {
         <div>
           <button
             type="submit"
-            className="w-fit flex mx-auto py-2 px-4 border border-transparent rounded-md shadow-sm text-md font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            className="w-fit flex mx-auto py-2 px-4 border border-transparent rounded-md shadow-sm text-md font-medium text-white bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
             Submit
           </button>

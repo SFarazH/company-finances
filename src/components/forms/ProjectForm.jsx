@@ -66,14 +66,14 @@ const ProjectForm = ({ setTemp, setIsForm }) => {
   };
 
   return (
-    <div className="max-w-md mx-auto p-6 bg-white shadow-md rounded-md">
-      <h2 className="text-xl font-bold mb-4">Project Form</h2>
+    <div className="max-w-xl mx-auto mb-8 pb-4 shadow-md rounded-md p-4">
+      <p className="text-center text-xl font-semibold mb-4">Add Project</p>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div key={1} className="mb-4">
           <label className="block text-gray-700">Company</label>
           <select
             {...register("clientId", { required: true })}
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm"
+            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-md"
           >
             <option value="">Select a company</option>
             {companyNames.map((companyName) => (
@@ -116,7 +116,7 @@ const ProjectForm = ({ setTemp, setIsForm }) => {
           <label className="block text-gray-700">Project Name</label>
           <input
             {...register("projectName", { required: true })}
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm"
+            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-md"
           />
           {errors.projectName && (
             <span className="text-red-600">This field is required</span>
@@ -127,7 +127,7 @@ const ProjectForm = ({ setTemp, setIsForm }) => {
           <label className="block text-gray-700">Project Consultant Name</label>
           <input
             {...register("projectConsultant.name", { required: false })}
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm"
+            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-md"
           />
           {errors.projectConsultant?.name && (
             <span className="text-red-600">This field is required</span>
@@ -142,7 +142,7 @@ const ProjectForm = ({ setTemp, setIsForm }) => {
               min: 0,
             })}
             type="number"
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm"
+            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-md"
           />
           {errors.projectConsultant?.price && (
             <span className="text-red-600">Please enter valid value!</span>
@@ -153,7 +153,7 @@ const ProjectForm = ({ setTemp, setIsForm }) => {
           <label className="block text-gray-700">Project Manager</label>
           <input
             {...register("projectManager", { required: true })}
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm"
+            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-md"
           />
           {errors.projectManager && (
             <span className="text-red-600">This field is required</span>
@@ -165,7 +165,7 @@ const ProjectForm = ({ setTemp, setIsForm }) => {
           <input
             {...register("dateReceived", { required: true })}
             type="date"
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm"
+            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-md"
           />
           {errors.dateReceived && (
             <span className="text-red-600">This field is required</span>
@@ -177,7 +177,7 @@ const ProjectForm = ({ setTemp, setIsForm }) => {
           <input
             {...register("deliveryDate", { required: true })}
             type="date"
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm"
+            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-md"
           />
           {errors.deliveryDate && (
             <span className="text-red-600">This field is required</span>
@@ -189,7 +189,7 @@ const ProjectForm = ({ setTemp, setIsForm }) => {
           <input
             {...register("finalPrice", { required: true })}
             type="number"
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm"
+            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-md"
           />
           {errors.finalPrice && (
             <span className="text-red-600">This field is required</span>
@@ -201,7 +201,7 @@ const ProjectForm = ({ setTemp, setIsForm }) => {
           <input
             {...register("GSTPercent", { required: true })}
             type="number"
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm"
+            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-md"
           />
           {errors.GSTPercent && (
             <span className="text-red-600">This field is required</span>
@@ -213,7 +213,7 @@ const ProjectForm = ({ setTemp, setIsForm }) => {
           <input
             {...register("TDS", { required: true })}
             type="number"
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm"
+            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-md"
           />
           {errors.TDS && (
             <span className="text-red-600">This field is required</span>
@@ -227,7 +227,7 @@ const ProjectForm = ({ setTemp, setIsForm }) => {
 
         <button
           type="submit"
-          className="w-full bg-blue-500 text-white py-2 px-4 rounded-md"
+          className="w-fit flex mx-auto py-2 px-4 border border-transparent rounded-md shadow-sm text-md font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
         >
           Submit
         </button>
