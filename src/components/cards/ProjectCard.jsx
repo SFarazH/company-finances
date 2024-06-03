@@ -6,8 +6,14 @@ import { IoArrowBackCircle } from "react-icons/io5";
 import { formatDate } from "../functions";
 import axios from "axios";
 
-export default function ProjectCard(props) {
-  let navigate = useNavigate();
+export default function ProjectCard() {
+  const navigate = useNavigate();
+  const [projectData, setProjectData] = useState(null);
+  const [paymentsData, setPaymentData] = useState(null);
+  const [temp, setTemp] = useState(0);
+  const [data, setData] = useState(null);
+  const { projectId } = useParams();
+
   const PriceList = (props) => {
     return (
       <div
@@ -34,11 +40,6 @@ export default function ProjectCard(props) {
       </div>
     );
   };
-
-  const [projectData, setProjectData] = useState(null);
-  const [paymentsData, setPaymentData] = useState(null);
-  const [data, setData] = useState(null);
-
   const fetchProjectData = async (id) => {
     try {
       const projectConfig = {
@@ -60,17 +61,31 @@ export default function ProjectCard(props) {
       console.error(error);
     }
   };
+  const updateStatus = async (id) => {
+    const config = {
+      url: "http://localhost:4000/project/update-status",
+      method: "patch",
+      data: {
+        projectId: id,
+      },
+    };
+    axios(config)
+      .then((res) => {
+        console.log(res.data);
+        setTemp((prev) => prev + 1);
+      })
+      .catch((e) => console.error(e));
+  };
+
   useEffect(() => {
     if (projectData && paymentsData) {
       setData({ ...projectData, payments: paymentsData });
     }
   }, [projectData, paymentsData]);
-
-  const { projectId } = useParams();
-
   useEffect(() => {
     fetchProjectData(projectId);
-  }, []);
+  }, [temp]);
+
   return (
     <>
       {data && (
@@ -181,7 +196,6 @@ export default function ProjectCard(props) {
                 <div className=" bg-gray-100 p-2 px-3 rounded-lg">
                   <p className="text-lg py-1 font-semibold">Finances</p>
                   <PriceList
-                    
                     category="Net Receivable"
                     price={data.finalPrice}
                   />
@@ -214,6 +228,18 @@ export default function ProjectCard(props) {
                   />
                 </div>
               </div>
+            </div>
+            <div className="flex mt-3 justify-center">
+              <button
+                className={`${
+                  data.isClosed
+                    ? `bg-green-500 hover:bg-green-600`
+                    : `bg-red-500 hover:bg-red-600`
+                } rounded-full p-2 font-semibold text-white my-2 transition ease-in-out duration-150`}
+                onClick={() => updateStatus(data._id)}
+              >
+                {data.isClosed ? `Open Project` : `Close Project`}
+              </button>
             </div>
           </div>
         </div>
