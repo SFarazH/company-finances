@@ -82,7 +82,7 @@ export default function Purchases() {
                         setQueryParams={setQueryParams}
                         setTemp={setTemp}
                       />
-                      {purchases &&
+                      {purchases && purchases.length > 0 ? (
                         purchases.map((purchase) => (
                           <Link to={`/purchases/${purchase._id}`}>
                             <div className="rounded-xl border p-4 py-2 border-gray-900 my-4 flex items-center text-lg justify-between">
@@ -103,7 +103,12 @@ export default function Purchases() {
                               </p>
                             </div>
                           </Link>
-                        ))}
+                        ))
+                      ) : (
+                        <p className="text-lg text-red-500 font-semibold text-center mt-4">
+                          No purchases found!
+                        </p>
+                      )}
                     </>
                   )}
                 </div>

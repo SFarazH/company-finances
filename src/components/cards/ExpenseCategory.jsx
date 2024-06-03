@@ -62,10 +62,15 @@ const ExpenseCategory = () => {
           </div>
           <SetQuery setQueryParams={setQueryParams} setTemp={setTemp} />
           <div className="">
-            {expenseData &&
+            {expenseData && expenseData.length > 0 ? (
               expenseData.map((expense) => (
                 <ExpenseCard key={expense._id} {...expense} />
-              ))}
+              ))
+            ) : (
+              <p className="text-lg text-red-500 font-semibold text-center mt-4">
+                No expenses found!
+              </p>
+            )}
           </div>
         </>
       }
