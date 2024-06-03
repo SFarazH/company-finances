@@ -22,7 +22,7 @@ const PaymentForm = ({ setIsForm, setTemp }) => {
 
   const getProjectsName = async () => {
     const config = {
-      url: "http://localhost:4000/project/names",
+      url: "https://obb-finance-backend-1.onrender.com/project/names",
       method: "get",
       params: {
         liability: true,
@@ -42,7 +42,7 @@ const PaymentForm = ({ setIsForm, setTemp }) => {
 
   const addPayment = async (data) => {
     const config = {
-      url: "http://localhost:4000/payment/add",
+      url: "https://obb-finance-backend-1.onrender.com/payment/add",
       method: "post",
       data: data,
     };

@@ -57,7 +57,7 @@ const BarGraph = ({ year }) => {
         },
       };
       axios
-        .get("http://localhost:4000/project/all", config)
+        .get("https://obb-finance-backend-1.onrender.com/project/all", config)
         .then((res) => setProjectsByMonth(getOrdersByMonth(res.data)))
         .catch((e) => console.error("Error fetching data:", e));
     };

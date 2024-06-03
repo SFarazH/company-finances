@@ -19,12 +19,12 @@ const ExpenseForm = ({ setIsForm }) => {
   const onSubmit = (data) => {
     data.expenseAmount = parseFloat(data.expenseAmount);
     addExpense(data);
-  // console.log(data);
+    // console.log(data);
   };
 
   const getProjectsName = async () => {
     const config = {
-      url: "http://localhost:4000/purchase/all",
+      url: "https://obb-finance-backend-1.onrender.com/purchase/all",
       method: "get",
     };
     axios(config)
@@ -46,7 +46,7 @@ const ExpenseForm = ({ setIsForm }) => {
 
   const addExpense = async (data) => {
     const config = {
-      url: "http://localhost:4000/expense/add",
+      url: "https://obb-finance-backend-1.onrender.com/expense/add",
       method: "post",
       data: data,
     };

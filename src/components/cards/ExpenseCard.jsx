@@ -8,7 +8,7 @@ export default function ExpenseCard(props) {
   const [projectDetails, setProjectData] = useState(null);
   const getProjDetails = async () => {
     const config = {
-      url: "http://localhost:4000/purchase/id",
+      url: "https://obb-finance-backend-1.onrender.com/purchase/id",
       method: "get",
       params: {
         projectPurchaseId: props.projectPurchaseId,

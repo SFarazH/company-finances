@@ -12,7 +12,7 @@ export default function PurchaseCard() {
   const { purchaseId } = useParams();
   const getPurchaseById = async (id) => {
     const config = {
-      url: "http://localhost:4000/purchase/id",
+      url: "https://obb-finance-backend-1.onrender.com/purchase/id",
       method: "get",
       params: {
         projectPurchaseId: id,
@@ -25,7 +25,7 @@ export default function PurchaseCard() {
 
   const getPaymentsDone = async (id) => {
     const config = {
-      url: "http://localhost:4000/expense/id",
+      url: "https://obb-finance-backend-1.onrender.com/expense/id",
       method: "get",
       params: {
         purchaseId: id,
@@ -37,7 +37,7 @@ export default function PurchaseCard() {
       })
       .catch((e) => console.error(e));
   };
-  
+
   const ProgressBar = ({ progressPercentage }) => {
     return (
       <div className="h-4 w-full bg-gray-300 rounded-xl overflow-hidden border-black">

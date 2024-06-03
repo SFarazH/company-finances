@@ -28,7 +28,7 @@ export default function Companies() {
       },
     };
     axios
-      .get("http://localhost:4000/client/get", config)
+      .get("https://obb-finance-backend-1.onrender.com/client/get", config)
       .then((res) => setClients(res.data))
       .catch((e) => console.error(e));
   }, [temp]);
@@ -72,9 +72,7 @@ export default function Companies() {
                       {clientName.map((client) => (
                         <Link key={client._id} to={`/clients/${client._id}`}>
                           <div key={client._id} className="my-2">
-                            <div
-                              className="border p-3 rounded-full text-xl cursor-pointer flex justify-between"
-                            >
+                            <div className="border p-3 rounded-full text-xl cursor-pointer flex justify-between">
                               {client.companyName}
                             </div>
                           </div>

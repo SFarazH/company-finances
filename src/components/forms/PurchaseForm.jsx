@@ -22,7 +22,7 @@ const PurchaseForm = ({ setIsForm }) => {
 
   const getProjectsName = async () => {
     const config = {
-      url: "http://localhost:4000/project/names",
+      url: "https://obb-finance-backend-1.onrender.com/project/names",
       method: "get",
     };
     axios(config)
@@ -39,7 +39,7 @@ const PurchaseForm = ({ setIsForm }) => {
 
   const addProductPurchase = async (data) => {
     const config = {
-      url: "http://localhost:4000/purchase/add",
+      url: "https://obb-finance-backend-1.onrender.com/purchase/add",
       method: "post",
       data: data,
     };

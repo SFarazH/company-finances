@@ -117,8 +117,8 @@ const LineChart = ({ year }) => {
   };
 
   const getData = async () => {
-    const url1 = "http://localhost:4000/payment/get";
-    const url2 = "http://localhost:4000/expense/all";
+    const url1 = "https://obb-finance-backend-1.onrender.com/payment/get";
+    const url2 = "https://obb-finance-backend-1.onrender.com/expense/all";
     const config = {
       params: {
         year: year,

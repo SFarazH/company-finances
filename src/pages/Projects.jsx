@@ -36,7 +36,7 @@ export default function Projects() {
 
   useEffect(() => {
     const config = {
-      url: "http://localhost:4000/project/all",
+      url: "https://obb-finance-backend-1.onrender.com/project/all",
       method: "get",
       params: { ...queryParams },
     };

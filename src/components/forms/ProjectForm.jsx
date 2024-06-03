@@ -7,7 +7,7 @@ const ProjectForm = ({ setTemp, setIsForm }) => {
   const [success, setSuccess] = useState(false);
   const getCompanyNames = async () => {
     const config = {
-      url: "http://localhost:4000/client/get",
+      url: "https://obb-finance-backend-1.onrender.com/client/get",
       method: "get",
       params: {
         onlyNames: true,
@@ -20,7 +20,7 @@ const ProjectForm = ({ setTemp, setIsForm }) => {
 
   const addProject = async (formData) => {
     const config = {
-      url: "http://localhost:4000/project/add",
+      url: "https://obb-finance-backend-1.onrender.com/project/add",
       method: "post",
       data: formData,
     };

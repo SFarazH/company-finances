@@ -5,8 +5,9 @@ import { Pie } from "react-chartjs-2";
 const PieChart = () => {
   const [liabilityData, setLiabilityData] = useState(null);
   const getData = async () => {
-    const url1 = "http://localhost:4000/project/liability";
-    const url2 = "http://localhost:4000/purchase/liability";
+    const url1 = "https://obb-finance-backend-1.onrender.com/project/liability";
+    const url2 =
+      "https://obb-finance-backend-1.onrender.com/purchase/liability";
 
     axios
       .all([axios.get(url1), axios.get(url2)])
