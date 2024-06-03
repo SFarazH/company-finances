@@ -5,6 +5,7 @@ import { Link, useParams, useNavigate } from "react-router-dom";
 import { IoArrowBackCircle } from "react-icons/io5";
 import { formatDate } from "../functions";
 import axios from "axios";
+import Spinner from "../Spinner";
 
 export default function ProjectCard({ setTemp }) {
   const navigate = useNavigate();
@@ -94,164 +95,174 @@ export default function ProjectCard({ setTemp }) {
   }, [status, projectId]);
 
   return (
-    <>
-      {data && (
-        <div className="mt-2">
-          <IoArrowBackCircle
-            size={35}
-            color="green"
-            className="cursor-pointer"
-            onClick={() => navigate(-1)}
-          />
+    <Spinner
+      component={
+        <>
+          {data && (
+            <div className="mt-2">
+              <IoArrowBackCircle
+                size={35}
+                color="green"
+                className="cursor-pointer"
+                onClick={() => navigate(-1)}
+              />
 
-          <div className="border rounded-lg p-2 mt-2">
-            <div className="flex justify-between items-center mb-8">
-              <p className="text-2xl font-semibold">
-                <span className="text-[#002147]">{data.projectName}</span> -{" "}
-                <span className="pl-4 text-xl">{data.client}</span>
-              </p>
-              <div className="flex gap-4 items-center">
-                <FaCircle
-                  size="1.5em"
-                  color={data.isClosed ? `red` : `green`}
-                />
-                {data.projectType === "software" ? (
-                  <FaLaptop size="2em" />
-                ) : (
-                  <PiCpuFill size="2em" />
-                )}
-              </div>
-            </div>
-
-            <div className="grid grid-cols-3 gap-4">
-              <div className="text-lg">
-                <p className="mb-4">Project Manager : {data.projectManager}</p>
-
-                {data.projectConsultant && (
-                  <p className="my-4">
-                    Project Consultant : {data.projectConsultant.name}
+              <div className="border rounded-lg p-2 mt-2">
+                <div className="flex justify-between items-center mb-8">
+                  <p className="text-2xl font-semibold">
+                    <span className="text-[#002147]">{data.projectName}</span> -{" "}
+                    <span className="pl-4 text-xl">{data.client}</span>
                   </p>
-                )}
-
-                <p className="my-4">
-                  Received Date :{" "}
-                  <span className="font-semibold">
-                    {formatDate(data.dateReceived)}
-                  </span>
-                </p>
-
-                <p className="my-4">
-                  Delivery Date :{" "}
-                  <span className="font-bold text-red-500">
-                    {formatDate(data.deliveryDate)}
-                  </span>
-                </p>
-              </div>
-
-              <div className="">
-                <div className="bg-gray-100 p-2 px-3 rounded-lg">
-                  <p className="text-lg py-2 font-semibold">Payments</p>
-
-                  <div className="flex justify-between items-center gap-2">
-                    <ProgressBar
-                      progressPercentage={data.paymentPercentReceivedTillDate}
+                  <div className="flex gap-4 items-center">
+                    <FaCircle
+                      size="1.5em"
+                      color={data.isClosed ? `red` : `green`}
                     />
+                    {data.projectType === "software" ? (
+                      <FaLaptop size="2em" />
+                    ) : (
+                      <PiCpuFill size="2em" />
+                    )}
+                  </div>
+                </div>
 
-                    <p className="font-semibold text-md text-center">
-                      ({Math.round(data.paymentPercentReceivedTillDate)}%)
+                <div className="grid grid-cols-3 gap-4">
+                  <div className="text-lg">
+                    <p className="mb-4">
+                      Project Manager : {data.projectManager}
+                    </p>
+
+                    {data.projectConsultant && (
+                      <p className="my-4">
+                        Project Consultant : {data.projectConsultant.name}
+                      </p>
+                    )}
+
+                    <p className="my-4">
+                      Received Date :{" "}
+                      <span className="font-semibold">
+                        {formatDate(data.dateReceived)}
+                      </span>
+                    </p>
+
+                    <p className="my-4">
+                      Delivery Date :{" "}
+                      <span className="font-bold text-red-500">
+                        {formatDate(data.deliveryDate)}
+                      </span>
                     </p>
                   </div>
 
-                  <div className="mt-4">
-                    {data.payments.map((pay) => (
-                      <div key={pay._id} className="flex justify-between">
-                        <p>{formatDate(pay.paymentDate)}</p>
-                        <p className="font-semibold font-lg">
-                          {pay.receivedAmount}
+                  <div className="">
+                    <div className="bg-gray-100 p-2 px-3 rounded-lg">
+                      <p className="text-lg py-2 font-semibold">Payments</p>
+
+                      <div className="flex justify-between items-center gap-2">
+                        <ProgressBar
+                          progressPercentage={
+                            data.paymentPercentReceivedTillDate
+                          }
+                        />
+
+                        <p className="font-semibold text-md text-center">
+                          ({Math.round(data.paymentPercentReceivedTillDate)}%)
                         </p>
                       </div>
-                    ))}
-                    <br />
-                    <PriceList
-                      category="Amount Received"
-                      price={data.paymentReceivedTillDate}
-                      topborder
-                    />
-                    <PriceList
-                      category="Liability"
-                      color="red-500"
-                      price={data.projectLiability}
-                    />
+
+                      <div className="mt-4">
+                        {data.payments.map((pay) => (
+                          <div key={pay._id} className="flex justify-between">
+                            <p>{formatDate(pay.paymentDate)}</p>
+                            <p className="font-semibold font-lg">
+                              {pay.receivedAmount}
+                            </p>
+                          </div>
+                        ))}
+                        <br />
+                        <PriceList
+                          category="Amount Received"
+                          price={data.paymentReceivedTillDate}
+                          topborder
+                        />
+                        <PriceList
+                          category="Liability"
+                          color="red-500"
+                          price={data.projectLiability}
+                        />
+                      </div>
+                    </div>
+                    <div className="p-2 px-3 bg-red-100 mt-3 rounded-lg">
+                      <p className="text-lg py-2 font-semibold">Purchases</p>
+                      {data.projectPurchasesArray.map((purchase) => (
+                        <Link
+                          key={purchase.projectPurcaseId}
+                          to={`/purchases/${purchase.projectPurcaseId}`}
+                        >
+                          <p className="text-lg font-semibold">
+                            {purchase.productName}
+                          </p>
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="">
+                    <div className=" bg-gray-100 p-2 px-3 rounded-lg">
+                      <p className="text-lg py-1 font-semibold">Finances</p>
+                      <PriceList
+                        category="Net Receivable"
+                        price={data.finalPrice}
+                      />
+                      <br />
+                      <PriceList
+                        category="Project Purchases"
+                        price={data.projectPurchasesCost}
+                      />
+                      {Object.entries(data.GST).map(([key, value]) => (
+                        <PriceList
+                          key={key}
+                          category={`${key} - ${value}%`}
+                          price={data.finalPrice * (value / 100)}
+                        />
+                      ))}
+                      <PriceList
+                        category={`TDS - ${data.TDS}%`}
+                        price={data.finalPrice * (data.TDS / 100)}
+                      />
+                      <PriceList
+                        category="Consultant Fee"
+                        price={
+                          data.projectConsultant
+                            ? data.projectConsultant.price
+                            : 0
+                        }
+                      />
+                      <br />
+                      <PriceList
+                        category="Profit"
+                        price={data.netProfit}
+                        topborder
+                      />
+                    </div>
                   </div>
                 </div>
-                <div className="p-2 px-3 bg-red-100 mt-3 rounded-lg">
-                  <p className="text-lg py-2 font-semibold">Purchases</p>
-                  {data.projectPurchasesArray.map((purchase) => (
-                    <Link
-                      key={purchase.projectPurcaseId}
-                      to={`/purchases/${purchase.projectPurcaseId}`}
-                    >
-                      <p className="text-lg font-semibold">
-                        {purchase.productName}
-                      </p>
-                    </Link>
-                  ))}
-                </div>
-              </div>
-
-              <div className="">
-                <div className=" bg-gray-100 p-2 px-3 rounded-lg">
-                  <p className="text-lg py-1 font-semibold">Finances</p>
-                  <PriceList
-                    category="Net Receivable"
-                    price={data.finalPrice}
-                  />
-                  <br />
-                  <PriceList
-                    category="Project Purchases"
-                    price={data.projectPurchasesCost}
-                  />
-                  {Object.entries(data.GST).map(([key, value]) => (
-                    <PriceList
-                      key={key}
-                      category={`${key} - ${value}%`}
-                      price={data.finalPrice * (value / 100)}
-                    />
-                  ))}
-                  <PriceList
-                    category={`TDS - ${data.TDS}%`}
-                    price={data.finalPrice * (data.TDS / 100)}
-                  />
-                  <PriceList
-                    category="Consultant Fee"
-                    price={
-                      data.projectConsultant ? data.projectConsultant.price : 0
-                    }
-                  />
-                  <br />
-                  <PriceList
-                    category="Profit"
-                    price={data.netProfit}
-                    topborder
-                  />
+                <div className="flex mt-3 justify-center">
+                  <button
+                    className={`${
+                      data.isClosed
+                        ? `bg-green-500 hover:bg-green-600`
+                        : `bg-red-500 hover:bg-red-600`
+                    } rounded-full p-2 font-semibold text-white my-2 transition ease-in-out duration-150`}
+                    onClick={() => updateStatus(data._id)}
+                  >
+                    {data.isClosed ? `Open Project` : `Close Project`}
+                  </button>
                 </div>
               </div>
             </div>
-            <div className="flex mt-3 justify-center">
-              <button
-                className={`${
-                  data.isClosed
-                    ? `bg-green-500 hover:bg-green-600`
-                    : `bg-red-500 hover:bg-red-600`
-                } rounded-full p-2 font-semibold text-white my-2 transition ease-in-out duration-150`}
-                onClick={() => updateStatus(data._id)}
-              >
-                {data.isClosed ? `Open Project` : `Close Project`}
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-    </>
+          )}
+        </>
+      }
+    />
   );
 }

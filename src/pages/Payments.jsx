@@ -15,16 +15,6 @@ export default function Payments() {
     projectId: "",
   });
   const [temp, setTemp] = useState(0);
-  const [showLoader, setShowLoader] = useState(true);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowLoader(false);
-    }, 1000);
-
-    return () => clearTimeout(timer);
-  }, []);
-
   const getPayments = async () => {
     const config = {
       url: "https://obb-finance-backend-1.onrender.com/payment/get",
@@ -45,10 +35,8 @@ export default function Payments() {
   }, [temp]);
 
   return (
-    <>
-      {showLoader ? (
-        <Spinner />
-      ) : (
+    <Spinner
+      component={
         <div className="px-8">
           <div className="flex justify-between items-center">
             <p className="text-3xl font-semibold my-4">Payments</p>
@@ -91,7 +79,7 @@ export default function Payments() {
             </>
           )}
         </div>
-      )}
-    </>
+      }
+    />
   );
 }

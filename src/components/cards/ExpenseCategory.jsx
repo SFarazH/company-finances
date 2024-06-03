@@ -5,6 +5,7 @@ import { IoArrowBackCircle } from "react-icons/io5";
 import { FaCheck } from "react-icons/fa";
 import { useNavigate, useParams } from "react-router-dom";
 import SetQuery from "../SetQuery";
+import Spinner from "../Spinner";
 
 const ExpenseCategory = () => {
   const category = {
@@ -45,26 +46,30 @@ const ExpenseCategory = () => {
     getExpenses();
   }, [expenseCategory, temp]);
   return (
-    <div>
-      <div className="flex gap-4 items-center">
-        <IoArrowBackCircle
-          size={40}
-          color="green"
-          className="cursor-pointer"
-          onClick={() => navigate(-1)}
-        />
-        <p className="text-2xl font-semibold my-4">
-          {category[expenseCategory]}
-        </p>
-      </div>
-      <SetQuery setQueryParams={setQueryParams} setTemp={setTemp} />
-      <div className="">
-        {expenseData &&
-          expenseData.map((expense) => (
-            <ExpenseCard key={expense._id} {...expense} />
-          ))}
-      </div>
-    </div>
+    <Spinner
+      component={
+        <>
+          <div className="flex gap-4 items-center">
+            <IoArrowBackCircle
+              size={40}
+              color="green"
+              className="cursor-pointer"
+              onClick={() => navigate(-1)}
+            />
+            <p className="text-2xl font-semibold my-4">
+              {category[expenseCategory]}
+            </p>
+          </div>
+          <SetQuery setQueryParams={setQueryParams} setTemp={setTemp} />
+          <div className="">
+            {expenseData &&
+              expenseData.map((expense) => (
+                <ExpenseCard key={expense._id} {...expense} />
+              ))}
+          </div>
+        </>
+      }
+    />
   );
 };
 

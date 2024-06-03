@@ -11,15 +11,6 @@ export default function Companies() {
   const [isForm, setIsForm] = useState(false);
   const navigate = useNavigate();
   const [temp, setTemp] = useState(0);
-  const [showLoader, setShowLoader] = useState(true);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowLoader(false);
-    }, 1000);
-
-    return () => clearTimeout(timer);
-  }, []);
 
   useEffect(() => {
     const config = {
@@ -35,58 +26,58 @@ export default function Companies() {
 
   return (
     <>
-      {showLoader ? (
-        <Spinner />
-      ) : (
-        <div className="px-8">
-          <div className="flex justify-between items-center">
-            <p className="text-3xl font-semibold my-4 ">Companies</p>
-            {isForm ? (
-              <IoIosCloseCircle
-                color="red"
-                size={45}
-                className="cursor-pointer"
-                onClick={() => setIsForm(false)}
-              />
-            ) : (
-              <IoIosAddCircle
-                size={45}
-                color="#003262"
-                className="cursor-pointer"
-                onClick={() => {
-                  setIsForm(true);
-                  navigate("/clients");
-                }}
-              />
-            )}
-          </div>
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <>
-                  {isForm ? (
-                    <CompanyForm setIsForm={setIsForm} setTemp={setTemp} />
-                  ) : (
-                    <>
-                      {clientName.map((client) => (
-                        <Link key={client._id} to={`/clients/${client._id}`}>
-                          <div key={client._id} className="my-2">
-                            <div className="border p-3 rounded-full text-xl cursor-pointer flex justify-between">
-                              {client.companyName}
+      <Spinner
+        component={
+          <div className="px-8">
+            <div className="flex justify-between items-center">
+              <p className="text-3xl font-semibold my-4 ">Companies</p>
+              {isForm ? (
+                <IoIosCloseCircle
+                  color="red"
+                  size={45}
+                  className="cursor-pointer"
+                  onClick={() => setIsForm(false)}
+                />
+              ) : (
+                <IoIosAddCircle
+                  size={45}
+                  color="#003262"
+                  className="cursor-pointer"
+                  onClick={() => {
+                    setIsForm(true);
+                    navigate("/clients");
+                  }}
+                />
+              )}
+            </div>
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  <>
+                    {isForm ? (
+                      <CompanyForm setIsForm={setIsForm} setTemp={setTemp} />
+                    ) : (
+                      <>
+                        {clientName.map((client) => (
+                          <Link key={client._id} to={`/clients/${client._id}`}>
+                            <div key={client._id} className="my-2">
+                              <div className="border p-3 rounded-full text-xl cursor-pointer flex justify-between">
+                                {client.companyName}
+                              </div>
                             </div>
-                          </div>
-                        </Link>
-                      ))}
-                    </>
-                  )}
-                </>
-              }
-            ></Route>
-            <Route path=":clientId" element={<CompanyCard />} />
-          </Routes>
-        </div>
-      )}
+                          </Link>
+                        ))}
+                      </>
+                    )}
+                  </>
+                }
+              ></Route>
+              <Route path=":clientId" element={<CompanyCard />} />
+            </Routes>
+          </div>
+        }
+      />
     </>
   );
 }
