@@ -4,11 +4,12 @@ import { PiMicrophoneSlash } from "react-icons/pi";
 import { formatDate } from "../functions";
 
 export default function ExpenseCard(props) {
-  console.log(props);
   const [projectDetails, setProjectData] = useState(null);
+  const [empData, setEmpData] = useState(null);
+
   const getProjDetails = async () => {
     const config = {
-      url: "https://obb-finance-backend-1.onrender.com/purchase/id",
+      url: "http://localhost:4000/purchase/id",
       method: "get",
       params: {
         projectPurchaseId: props.projectPurchaseId,
@@ -22,8 +23,23 @@ export default function ExpenseCard(props) {
     }
   };
 
+  const getEmployeeNames = async () => {
+    const config = {
+      url: "http://localhost:4000/employee/get",
+      method: "get",
+    };
+    axios(config)
+      .then((res) => setEmpData(res.data))
+      .catch((e) => console.error(e));
+  };
+  const getEmployeeNameById = (id) => {
+    const employee = empData.find((emp) => emp._id === id);
+    return employee ? employee.name : null;
+  };
+
   useEffect(() => {
     props.expenseCategory === "project" && getProjDetails();
+    props.expenseCategory === "salary" && getEmployeeNames();
   }, []);
 
   return (
@@ -42,12 +58,22 @@ export default function ExpenseCard(props) {
         </div>
         <div className="p-4">
           <div className="flex justify-between">
-            <p className="text-lg pb-1">
-              Amount :{" "}
-              <span className="font-bold text-xl text-red-600">
-                {props.expenseAmount}
-              </span>
-            </p>
+            <div>
+              <p className="text-lg pb-1">
+                Amount :{" "}
+                <span className="font-bold text-xl text-red-600">
+                  {props.expenseAmount}
+                </span>
+              </p>
+              {props.expenseCategory === "salary" && empData && (
+                <p className="text-lg pb-1">
+                  Employee Name :{" "}
+                  <span className="font-bold text-blue-900">
+                    {getEmployeeNameById(props.empId)}
+                  </span>
+                </p>
+              )}
+            </div>
             {props.expenseComments && (
               <p className="text-lg">
                 Details :{" "}

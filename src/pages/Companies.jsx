@@ -19,7 +19,7 @@ export default function Companies() {
       },
     };
     axios
-      .get("https://obb-finance-backend-1.onrender.com/client/get", config)
+      .get("http://localhost:4000/client/get", config)
       .then((res) => setClients(res.data))
       .catch((e) => console.error(e));
   }, [temp]);

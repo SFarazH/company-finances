@@ -4,5 +4,6 @@
   { "id": 3, "heading": "Projects", "link": "/projects" },
   { "id": 4, "heading": "Expenses", "link": "/expenses" },
   { "id": 5, "heading": "Project Purchases", "link": "/purchases" },
-  { "id": 6, "heading": "Payments", "link": "/payments" }
+  { "id": 6, "heading": "Payments", "link": "/payments" },
+  { "id": 7, "heading": "Employees", "link": "/employees" }
 ]

@@ -15,7 +15,7 @@ const DonutChart = () => {
   });
   const getExpenseData = async () => {
     const config = {
-      url: "https://obb-finance-backend-1.onrender.com/expense/all",
+      url: "http://localhost:4000/expense/all",
       method: "get",
     };
     axios(config)

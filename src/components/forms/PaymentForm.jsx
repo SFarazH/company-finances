@@ -22,7 +22,7 @@ const PaymentForm = ({ setIsForm, setTemp }) => {
 
   const getProjectsName = async () => {
     const config = {
-      url: "https://obb-finance-backend-1.onrender.com/project/names",
+      url: "http://localhost:4000/project/names",
       method: "get",
       params: {
         liability: true,
@@ -42,7 +42,7 @@ const PaymentForm = ({ setIsForm, setTemp }) => {
 
   const addPayment = async (data) => {
     const config = {
-      url: "https://obb-finance-backend-1.onrender.com/payment/add",
+      url: "http://localhost:4000/payment/add",
       method: "post",
       data: data,
     };
@@ -72,7 +72,9 @@ const PaymentForm = ({ setIsForm, setTemp }) => {
         <p className="text-center text-xl font-semibold mb-4">Add Payment</p>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="my-4">
-            <label className="block text-md font-medium text-gray-700">Project Name</label>
+            <label className="block text-md font-medium text-gray-700">
+              Project Name
+            </label>
             <select
               {...register("projectId", { required: true })}
               className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-md"
@@ -98,7 +100,9 @@ const PaymentForm = ({ setIsForm, setTemp }) => {
           </div>
 
           <div className="mb-4">
-            <label className="block text-md font-medium text-gray-700">Payment Amount</label>
+            <label className="block text-md font-medium text-gray-700">
+              Payment Amount
+            </label>
             <input
               {...register("amount", { required: true })}
               type="number"
@@ -110,7 +114,9 @@ const PaymentForm = ({ setIsForm, setTemp }) => {
           </div>
 
           <div className="mb-4">
-            <label className="block text-md font-medium text-gray-700">Payment Date</label>
+            <label className="block text-md font-medium text-gray-700">
+              Payment Date
+            </label>
             <input
               {...register("paymentDate", { required: true })}
               type="date"

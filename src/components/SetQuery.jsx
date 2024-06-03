@@ -11,7 +11,7 @@ const SetQuery = ({ setQueryParams, setTemp, isProject }) => {
   const [projNames, setNames] = useState(null);
   const getNames = async () => {
     const config = {
-      url: "https://obb-finance-backend-1.onrender.com/project/names",
+      url: "http://localhost:4000/project/names",
       method: "get",
     };
     try {

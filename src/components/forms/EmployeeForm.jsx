@@ -1,151 +1,147 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 
-const PurchaseForm = ({ setIsForm }) => {
-  const [projectNames, setProjectNames] = useState([]);
+const EmployeeForm = () => {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm();
 
-  const onSubmit = (data) => {
-    data.finalPriceProduct = parseFloat(data.finalPriceProduct);
-    console.log(data);
-    addProductPurchase(data);
-  };
-
-  const getProjectsName = async () => {
+  const addEmployee = async (data) => {
     const config = {
-      url: "http://localhost:4000/project/names",
-      method: "get",
-    };
-    axios(config)
-      .then((res) => {
-        setProjectNames(res.data);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  };
-  useEffect(() => {
-    getProjectsName();
-  }, []);
-
-  const addProductPurchase = async (data) => {
-    const config = {
-      url: "http://localhost:4000/purchase/add",
+      url: "http://localhost:4000/employee/add",
       method: "post",
       data: data,
     };
     axios(config)
       .then((res) => {
-        setError(false);
+        console.log(res);
         setSuccess(true);
-        setTimeout(() => {
-          setIsForm(false);
-        }, 2000);
-        // console.log(res.data);
       })
-      .catch((e) => {
-        setErrorMsg(e.response.data.error);
-        setError(true);
-      });
+      .catch((e) => console.log(e));
   };
-
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = (data) => {
+    data.aadhar = parseFloat(data.aadhar);
+    addEmployee(data);
+    console.log(data);
+  };
   return (
     <>
       <div className="max-w-xl mx-auto mb-8 pb-4 shadow-md rounded-md p-4">
-        <p className="text-center text-xl font-semibold mb-4">Add Purchase</p>
+        <p className="text-center text-xl font-semibold mb-4">Add Employee</p>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="my-4">
-            <label className="block text-md font-medium text-gray-700">
-              Project Name
-            </label>
-            <select
-              {...register("projectId", { required: true })}
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-md"
-            >
-              <option value="">Select a project</option>
-              {projectNames.map((project) => (
-                <option value={project._id}>{project.projectName}</option>
-              ))}
-            </select>
-            {errors.projectId && (
-              <span className="text-red-600">This field is required</span>
-            )}
-          </div>
-
           <div className="mb-4">
             <label className="block text-md font-medium text-gray-700">
-              Product Name
+              Name
             </label>
             <input
-              {...register("productName", { required: true })}
+              {...register("name", { required: true })}
               type="text"
               className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-md"
             />
-            {errors.productName && (
+            {errors.name && (
               <span className="text-red-600">This field is required</span>
             )}
           </div>
 
           <div className="mb-4">
             <label className="block text-md font-medium text-gray-700">
-              Vendor Name
+              Mobile
             </label>
             <input
-              {...register("vendorName", { required: true })}
-              type="text"
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-md"
-            />
-            {errors.vendorName && (
-              <span className="text-red-600">This field is required</span>
-            )}
-          </div>
-
-          <div className="mb-4">
-            <label className="block text-md font-medium text-gray-700">
-              Product Price
-            </label>
-            <input
-              {...register("finalPriceProduct", { required: true })}
+              {...register("mobile", { required: true })}
               type="number"
               className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-md"
             />
-            {errors.finalPriceProduct && (
+            {errors.mobile && (
               <span className="text-red-600">This field is required</span>
             )}
           </div>
 
           <div className="mb-4">
             <label className="block text-md font-medium text-gray-700">
-              Purchase Date
+              Email
             </label>
             <input
-              {...register("purchaseDate", { required: true })}
+              type="email"
+              {...register("email", { required: false })}
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-md"
+            />
+            {errors.email && (
+              <span className="text-red-600">This field is required</span>
+            )}
+          </div>
+
+          <div className="mb-4">
+            <label className="block text-md font-medium text-gray-700">
+              AADHAR Number
+            </label>
+            <input
+              {...register("aadhar", { required: true })}
+              type="text"
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-md"
+            />
+            {errors.aadhar && (
+              <span className="text-red-600">This field is required</span>
+            )}
+          </div>
+
+          <div className="mb-4">
+            <label className="block text-md font-medium text-gray-700">
+              PAN Number
+            </label>
+            <input
+              {...register("pan", { required: false })}
+              type="text"
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-md"
+            />
+            {/* {errors.pan && (
+              <span className="text-red-600">This field is required</span>
+            )} */}
+          </div>
+
+          <div className="mb-4">
+            <label className="block text-md font-medium text-gray-700">
+              Joining Date
+            </label>
+            <input
+              {...register("joiningDate", { required: true })}
               type="date"
               className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-md"
             />
-            {errors.purchaseDate && (
+            {errors.joiningDate && (
+              <span className="text-red-600">This field is required</span>
+            )}
+          </div>
+
+          <div className="mb-4">
+            <label className="block text-md font-medium text-gray-700">
+              Job Role
+            </label>
+            <input
+              {...register("jobRole", { required: true })}
+              type="text"
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-md"
+            />
+            {errors.jobRole && (
               <span className="text-red-600">This field is required</span>
             )}
           </div>
 
           {success && (
-            <p className="text-green-500 font-semibold font-lg text-center pb-4">
-              Project Purchase added successfully!
+            <p className="text-green-500 font-semibold text-center pb-4">
+              Employee added successfully!
             </p>
           )}
 
           {error && (
-            <p className="text-red-500 font-semibold font-lg text-center pb-4">
-              {errorMsg}!
+            <p className="text-red-500 font-semibold text-center pb-4">
+              {errorMsg}
             </p>
           )}
 
@@ -161,4 +157,4 @@ const PurchaseForm = ({ setIsForm }) => {
   );
 };
 
-export default PurchaseForm;
+export default EmployeeForm;

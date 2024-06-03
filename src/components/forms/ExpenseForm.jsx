@@ -7,6 +7,18 @@ const ExpenseForm = ({ setIsForm }) => {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
+  const [employees, setEmployees] = useState([]);
+
+  const getEmployeeNames = async () => {
+    const config = {
+      url: "http://localhost:4000/employee/get",
+      method: "get",
+    };
+    axios(config)
+      .then((res) => setEmployees(res.data))
+      .catch((e) => console.error(e));
+  };
+
   const {
     register,
     handleSubmit,
@@ -19,12 +31,12 @@ const ExpenseForm = ({ setIsForm }) => {
   const onSubmit = (data) => {
     data.expenseAmount = parseFloat(data.expenseAmount);
     addExpense(data);
-    // console.log(data);
+    console.log(data);
   };
 
   const getProjectsName = async () => {
     const config = {
-      url: "https://obb-finance-backend-1.onrender.com/purchase/all",
+      url: "http://localhost:4000/purchase/all",
       method: "get",
     };
     axios(config)
@@ -36,6 +48,7 @@ const ExpenseForm = ({ setIsForm }) => {
 
   useEffect(() => {
     getProjectsName();
+    getEmployeeNames();
   }, []);
 
   useEffect(() => {
@@ -46,7 +59,7 @@ const ExpenseForm = ({ setIsForm }) => {
 
   const addExpense = async (data) => {
     const config = {
-      url: "https://obb-finance-backend-1.onrender.com/expense/add",
+      url: "http://localhost:4000/expense/add",
       method: "post",
       data: data,
     };
@@ -115,6 +128,28 @@ const ExpenseForm = ({ setIsForm }) => {
                 {projectNames.map((product) => (
                   <option key={product._id} value={product._id}>
                     {product.productName}
+                  </option>
+                ))}
+              </select>
+              {errors.projectPurchaseId && (
+                <span className="text-red-600">This field is required</span>
+              )}
+            </div>
+          )}
+
+          {watch("expenseCategory") === "salary" && (
+            <div className="mb-4">
+              <label className="block text-md font-medium text-gray-700">
+                Employee Name
+              </label>
+              <select
+                {...register("empId", { required: true })}
+                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-md"
+              >
+                <option value="">Select Employee</option>
+                {employees.map((emp) => (
+                  <option key={emp._id} value={emp._id}>
+                    {emp.name}
                   </option>
                 ))}
               </select>

@@ -7,7 +7,7 @@ import Expenses from "./pages/Expenses";
 import Projects from "./pages/Projects";
 import Purchases from "./pages/Purchases";
 import Payments from "./pages/Payments";
-
+import Employees from "./pages/Employees";
 function App() {
   return (
     <Router>
@@ -26,6 +26,7 @@ function App() {
             <Route path="/expenses/*" element={<Expenses />} />
             <Route path="/purchases/*" element={<Purchases />} />
             <Route path="/payments" element={<Payments />} />
+            <Route path="/employees/*" element={<Employees />} />
           </Routes>
         </div>
       </div>

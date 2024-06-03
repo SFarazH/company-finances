@@ -17,7 +17,7 @@ export default function Payments() {
   const [temp, setTemp] = useState(0);
   const getPayments = async () => {
     const config = {
-      url: "https://obb-finance-backend-1.onrender.com/payment/get",
+      url: "http://localhost:4000/payment/get",
       method: "get",
       params: queryParams,
     };

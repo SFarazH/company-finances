@@ -38,7 +38,7 @@ export default function Projects() {
     const fetchProjects = async () => {
       try {
         const config = {
-          url: "https://obb-finance-backend-1.onrender.com/project/all",
+          url: "http://localhost:4000/project/all",
           method: "get",
           params: { ...queryParams },
         };

@@ -31,7 +31,7 @@ const CompanyForm = ({ setIsForm, setTemp }) => {
     };
     console.log(res);
     const config = {
-      url: "https://obb-finance-backend-1.onrender.com/client/add",
+      url: "http://localhost:4000/client/add",
       method: "post",
       data: res,
     };

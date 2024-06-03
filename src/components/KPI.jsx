@@ -41,7 +41,7 @@ export default function KPI() {
 
   useEffect(() => {
     axios
-      .get("https://obb-finance-backend-1.onrender.com/admin/admin")
+      .get("http://localhost:4000/admin/admin")
       .then((res) => {
         setKpi(res.data);
       })

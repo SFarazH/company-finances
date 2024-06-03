@@ -46,7 +46,7 @@ export default function ProjectCard({ setTemp }) {
   const fetchProjectData = async (id) => {
     try {
       const projectConfig = {
-        url: "https://obb-finance-backend-1.onrender.com/project/id",
+        url: "http://localhost:4000/project/id",
         method: "get",
         params: { projectId: id },
       };
@@ -54,7 +54,7 @@ export default function ProjectCard({ setTemp }) {
       setProjectData(projectResponse.data);
 
       const paymentsConfig = {
-        url: "https://obb-finance-backend-1.onrender.com/payment/id",
+        url: "http://localhost:4000/payment/id",
         method: "get",
         params: { projectId: id },
       };
@@ -67,7 +67,7 @@ export default function ProjectCard({ setTemp }) {
 
   const updateStatus = async (id) => {
     const config = {
-      url: "https://obb-finance-backend-1.onrender.com/project/update-status",
+      url: "http://localhost:4000/project/update-status",
       method: "patch",
       data: {
         projectId: id,

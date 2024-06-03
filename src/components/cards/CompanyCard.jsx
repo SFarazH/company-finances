@@ -18,7 +18,7 @@ export default function CompanyCard() {
   const { clientId } = useParams();
   const getClientData = async (clientId) => {
     const config = {
-      url: "https://obb-finance-backend-1.onrender.com/client/get",
+      url: "http://localhost:4000/client/get",
       method: "get",
       params: {
         clientId: clientId,

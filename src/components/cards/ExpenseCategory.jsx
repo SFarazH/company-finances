@@ -26,7 +26,7 @@ const ExpenseCategory = () => {
 
   const getExpenses = async () => {
     const config = {
-      url: "https://obb-finance-backend-1.onrender.com/expense/get",
+      url: "http://localhost:4000/expense/get",
       method: "get",
       params: {
         expenseCategory: expenseCategory,
