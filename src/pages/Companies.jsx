@@ -30,7 +30,7 @@ export default function Companies() {
         component={
           <div className="px-8">
             <div className="flex justify-between items-center">
-              <p className="text-3xl font-semibold my-4 ">Companies</p>
+              <p className="text-3xl font-semibold my-4 ">Clients</p>
               {isForm ? (
                 <IoIosCloseCircle
                   color="red"
@@ -56,7 +56,7 @@ export default function Companies() {
                 element={
                   <>
                     {isForm ? (
-                      <CompanyForm setIsForm={setIsForm} setTemp={setTemp} />
+                      <CompanyForm  setIsForm={setIsForm} setTemp={setTemp} />
                     ) : (
                       <>
                         {clientName.map((client) => (

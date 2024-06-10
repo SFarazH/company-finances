@@ -2,14 +2,68 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Country, State } from "country-state-city";
 import axios from "axios";
+import { useParams } from "react-router-dom";
 
-const CompanyForm = ({ setIsForm, setTemp }) => {
+const CompanyForm = ({ setIsForm, setTemp, isEdit }) => {
   const [success, setSuccess] = useState(false);
+  const [error, setError] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
+
+  const { clientId } = useParams();
+  const addClient = async (data) => {
+    const config = {
+      url: "http://localhost:4000/client/add",
+      method: "post",
+      data: data,
+    };
+    axios(config)
+      .then((res) => {
+        setSuccess(true);
+        setError(false);
+        setTimeout(() => {
+          setIsForm(false);
+          setTemp((t) => t + 1);
+        }, 1500);
+      })
+      .catch((e) => {
+        setErrorMsg(e.response.data.error);
+        setError(true);
+      });
+  };
+  const validationRules = isEdit ? {} : { required: true };
+
+  const editClient = async (data) => {
+    const config = {
+      url: "http://localhost:4000/client/edit",
+      method: "patch",
+      data: {
+        clientId: clientId,
+        ...data,
+      },
+    };
+    axios(config)
+      .then((res) => {
+        setSuccess(true);
+        setError(false);
+        setTimeout(() => {
+          setIsForm(false);
+          setTemp((t) => t + 1);
+        }, 1500);
+        console.log(res);
+      })
+      .catch((e) => {
+        setErrorMsg(e.response.data.error);
+        setError(true);
+      });
+
+    console.log(clientId, data);
+  };
+
   const onSubmit = (data) => {
     const companyAddress = {
       street: data.street,
@@ -20,7 +74,7 @@ const CompanyForm = ({ setIsForm, setTemp }) => {
     };
     const companyPOC = {
       name: data.pocName,
-      number: data.pocNumber,
+      mobile: data.pocNumber,
       email: data.pocEmail,
     };
     const res = {
@@ -29,21 +83,7 @@ const CompanyForm = ({ setIsForm, setTemp }) => {
       companyPOC: companyPOC,
       companyGSTN: data.companyGSTNumber,
     };
-    console.log(res);
-    const config = {
-      url: "http://localhost:4000/client/add",
-      method: "post",
-      data: res,
-    };
-    axios(config)
-      .then((res) => {
-        setSuccess(true);
-        setTimeout(() => {
-          setIsForm(false);
-          setTemp((t) => t + 1);
-        }, 1500);
-      })
-      .catch((e) => console.error(e));
+    isEdit ? editClient(res) : addClient(res);
   };
 
   const [selectedCountry, setSelectedCountry] = useState("");
@@ -54,7 +94,9 @@ const CompanyForm = ({ setIsForm, setTemp }) => {
 
   return (
     <div className="max-w-xl mx-auto mb-8 pb-4 shadow-md rounded-md p-4">
-      <p className="text-center text-xl font-semibold mb-4">Add Company</p>
+      <p className="text-center text-xl font-semibold mb-4">
+        {isEdit ? `Edit Company` : `Add Company`}
+      </p>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <div>
@@ -62,7 +104,7 @@ const CompanyForm = ({ setIsForm, setTemp }) => {
             Company Name
           </label>
           <input
-            {...register("companyName", { required: true })}
+            {...register("companyName", validationRules)}
             className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-md"
           />
           {errors.companyName && (
@@ -78,7 +120,7 @@ const CompanyForm = ({ setIsForm, setTemp }) => {
           </label>
           <div className="mt-1 space-y-4">
             <input
-              {...register("street", { required: true })}
+              {...register("street", validationRules)}
               placeholder="Street"
               className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-md"
             />
@@ -86,7 +128,7 @@ const CompanyForm = ({ setIsForm, setTemp }) => {
               <span className="text-red-500 text-sm">Street is required</span>
             )}
             <input
-              {...register("city", { required: true })}
+              {...register("city", validationRules)}
               placeholder="City"
               className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-md"
             />
@@ -94,7 +136,7 @@ const CompanyForm = ({ setIsForm, setTemp }) => {
               <span className="text-red-500 text-sm">City is required</span>
             )}
             <select
-              {...register("country", { required: true })}
+              {...register("country", validationRules)}
               onChange={(e) => setSelectedCountry(e.target.value)}
               className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-md"
             >
@@ -109,7 +151,7 @@ const CompanyForm = ({ setIsForm, setTemp }) => {
               <span className="text-red-500 text-sm">Country is required</span>
             )}
             <select
-              {...register("state", { required: true })}
+              {...register("state", validationRules)}
               className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-md"
             >
               <option value="">Select State</option>
@@ -123,7 +165,7 @@ const CompanyForm = ({ setIsForm, setTemp }) => {
               <span className="text-red-500 text-sm">State is required</span>
             )}
             <input
-              {...register("pincode", { required: true })}
+              {...register("pincode", validationRules)}
               placeholder="Pincode"
               className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-md"
             />
@@ -139,7 +181,7 @@ const CompanyForm = ({ setIsForm, setTemp }) => {
           </label>
           <div className="mt-1 space-y-4">
             <input
-              {...register("pocName", { required: true })}
+              {...register("pocName", validationRules)}
               placeholder="Name"
               className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-md"
             />
@@ -147,7 +189,7 @@ const CompanyForm = ({ setIsForm, setTemp }) => {
               <span className="text-red-500 text-sm">Name is required</span>
             )}
             <input
-              {...register("pocNumber", { required: true })}
+              {...register("pocNumber", validationRules)}
               placeholder="Number"
               className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-md"
             />
@@ -155,7 +197,7 @@ const CompanyForm = ({ setIsForm, setTemp }) => {
               <span className="text-red-500 text-sm">Number is required</span>
             )}
             <input
-              {...register("pocEmail", { required: true })}
+              {...register("pocEmail", validationRules)}
               placeholder="Email"
               className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-md"
             />
@@ -170,18 +212,24 @@ const CompanyForm = ({ setIsForm, setTemp }) => {
             Company GST Number
           </label>
           <input
-            {...register("companyGSTNumber", { required: true })}
+            {...register("companyGSTNumber", {})}
             className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-md"
           />
-          {errors.companyGSTNumber && (
+          {/* {errors.companyGSTNumber && (
             <span className="text-red-500 text-sm">
               Company GST Number is required
             </span>
-          )}
+          )} */}
         </div>
         {success && (
           <p className="text-green-500 font-semibold font-lg text-center">
-            Company added successfully!
+            Company {isEdit ? `updated` : `added`} successfully!
+          </p>
+        )}
+
+        {error && (
+          <p className="text-red-500 font-semibold font-lg text-center">
+            {errorMsg}
           </p>
         )}
         <div>
