@@ -38,7 +38,7 @@ export default function Projects() {
     const fetchProjects = async () => {
       try {
         const config = {
-          url: "http://localhost:4000/project/all",
+          url: `${process.env.REACT_APP_BACKEND_URL}/project/all`,
           method: "get",
           params: { ...queryParams },
         };

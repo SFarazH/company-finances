@@ -17,7 +17,7 @@ const CompanyForm = ({ setIsForm, setTemp, isEdit }) => {
   const { clientId } = useParams();
   const addClient = async (data) => {
     const config = {
-      url: "http://localhost:4000/client/add",
+      url: `${process.env.REACT_APP_BACKEND_URL}/client/add`,
       method: "post",
       data: data,
     };
@@ -39,7 +39,7 @@ const CompanyForm = ({ setIsForm, setTemp, isEdit }) => {
 
   const editClient = async (data) => {
     const config = {
-      url: "http://localhost:4000/client/edit",
+      url: `${process.env.REACT_APP_BACKEND_URL}/client/edit`,
       method: "patch",
       data: {
         clientId: clientId,

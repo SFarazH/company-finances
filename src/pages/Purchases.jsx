@@ -23,7 +23,7 @@ export default function Purchases() {
 
   const getPurchaseNames = async () => {
     const config = {
-      url: "http://localhost:4000/purchase/all",
+      url: `${process.env.REACT_APP_BACKEND_URL}/purchase/all`,
       method: "get",
       params: queryParams,
     };

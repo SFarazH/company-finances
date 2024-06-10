@@ -46,7 +46,7 @@ export default function ProjectCard({ setTemp }) {
   const fetchProjectData = async (id) => {
     try {
       const projectConfig = {
-        url: "http://localhost:4000/project/id",
+        url: `${process.env.REACT_APP_BACKEND_URL}/project/id`,
         method: "get",
         params: { projectId: id },
       };
@@ -54,7 +54,7 @@ export default function ProjectCard({ setTemp }) {
       setProjectData(projectResponse.data);
 
       const paymentsConfig = {
-        url: "http://localhost:4000/payment/id",
+        url: `${process.env.REACT_APP_BACKEND_URL}/payment/id`,
         method: "get",
         params: { projectId: id },
       };
@@ -67,7 +67,7 @@ export default function ProjectCard({ setTemp }) {
 
   const updateStatus = async (id) => {
     const config = {
-      url: "http://localhost:4000/project/update-status",
+      url: `${process.env.REACT_APP_BACKEND_URL}/project/update-status`,
       method: "patch",
       data: {
         projectId: id,

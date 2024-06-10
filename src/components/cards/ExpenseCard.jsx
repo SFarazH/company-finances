@@ -9,7 +9,7 @@ export default function ExpenseCard(props) {
 
   const getProjDetails = async () => {
     const config = {
-      url: "http://localhost:4000/purchase/id",
+      url: `${process.env.REACT_APP_BACKEND_URL}/purchase/id`,
       method: "get",
       params: {
         projectPurchaseId: props.projectPurchaseId,
@@ -25,7 +25,7 @@ export default function ExpenseCard(props) {
 
   const getEmployeeNames = async () => {
     const config = {
-      url: "http://localhost:4000/employee/get",
+      url: `${process.env.REACT_APP_BACKEND_URL}/employee/get`,
       method: "get",
     };
     axios(config)

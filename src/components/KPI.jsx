@@ -38,10 +38,9 @@ export default function KPI() {
       link: "/expenses",
     },
   ];
-
   useEffect(() => {
     axios
-      .get("http://localhost:4000/admin/admin")
+      .get(`${process.env.REACT_APP_BACKEND_URL}/admin/admin`)
       .then((res) => {
         setKpi(res.data);
       })

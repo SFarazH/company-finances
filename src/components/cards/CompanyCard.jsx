@@ -23,7 +23,7 @@ export default function CompanyCard() {
   const { clientId } = useParams();
   const getClientData = async (clientId) => {
     const config = {
-      url: "http://localhost:4000/client/get",
+      url: `${process.env.REACT_APP_BACKEND_URL}/client/get`,
       method: "get",
       params: {
         clientId: clientId,

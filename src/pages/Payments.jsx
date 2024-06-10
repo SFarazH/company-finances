@@ -17,7 +17,7 @@ export default function Payments() {
   const [temp, setTemp] = useState(0);
   const getPayments = async () => {
     const config = {
-      url: "http://localhost:4000/payment/get",
+      url: `${process.env.REACT_APP_BACKEND_URL}/payment/get`,
       method: "get",
       params: queryParams,
     };

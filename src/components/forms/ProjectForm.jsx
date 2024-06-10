@@ -9,7 +9,7 @@ const ProjectForm = ({ setTemp, setIsForm }) => {
 
   const getEmployeeNames = async () => {
     const config = {
-      url: "http://localhost:4000/employee/get",
+      url: `${process.env.REACT_APP_BACKEND_URL}/employee/get`,
       method: "get",
     };
     axios(config)
@@ -18,7 +18,7 @@ const ProjectForm = ({ setTemp, setIsForm }) => {
   };
   const getCompanyNames = async () => {
     const config = {
-      url: "http://localhost:4000/client/get",
+      url: `${process.env.REACT_APP_BACKEND_URL}/client/get`,
       method: "get",
       params: {
         onlyNames: true,
@@ -31,7 +31,7 @@ const ProjectForm = ({ setTemp, setIsForm }) => {
 
   const addProject = async (formData) => {
     const config = {
-      url: "http://localhost:4000/project/add",
+      url: `${process.env.REACT_APP_BACKEND_URL}/project/add`,
       method: "post",
       data: formData,
     };

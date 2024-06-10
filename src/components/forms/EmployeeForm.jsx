@@ -9,7 +9,7 @@ const EmployeeForm = ({ setTemp, setIsForm }) => {
 
   const addEmployee = async (data) => {
     const config = {
-      url: "http://localhost:4000/employee/add",
+      url: `${process.env.REACT_APP_BACKEND_URL}/employee/add`,
       method: "post",
       data: data,
     };

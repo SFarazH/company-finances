@@ -13,7 +13,7 @@ export default function PurchaseCard() {
   const { purchaseId } = useParams();
   const getPurchaseById = async (id) => {
     const config = {
-      url: "http://localhost:4000/purchase/id",
+      url: `${process.env.REACT_APP_BACKEND_URL}/purchase/id`,
       method: "get",
       params: {
         projectPurchaseId: id,
@@ -26,7 +26,7 @@ export default function PurchaseCard() {
 
   const getPaymentsDone = async (id) => {
     const config = {
-      url: "http://localhost:4000/expense/id",
+      url: `${process.env.REACT_APP_BACKEND_URL}/expense/id`,
       method: "get",
       params: {
         purchaseId: id,

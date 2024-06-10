@@ -11,7 +11,7 @@ const ExpenseForm = ({ setIsForm }) => {
 
   const getEmployeeNames = async () => {
     const config = {
-      url: "http://localhost:4000/employee/get",
+      url: `${process.env.REACT_APP_BACKEND_URL}/employee/get`,
       method: "get",
     };
     axios(config)
@@ -36,7 +36,7 @@ const ExpenseForm = ({ setIsForm }) => {
 
   const getProjectsName = async () => {
     const config = {
-      url: "http://localhost:4000/purchase/all",
+      url: `${process.env.REACT_APP_BACKEND_URL}/purchase/all`,
       method: "get",
     };
     axios(config)
@@ -59,7 +59,7 @@ const ExpenseForm = ({ setIsForm }) => {
 
   const addExpense = async (data) => {
     const config = {
-      url: "http://localhost:4000/expense/add",
+      url: `${process.env.REACT_APP_BACKEND_URL}/expense/add`,
       method: "post",
       data: data,
     };

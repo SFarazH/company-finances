@@ -11,7 +11,7 @@ const SetQuery = ({ setQueryParams, setTemp, isProject }) => {
   const [projNames, setNames] = useState(null);
   const getNames = async () => {
     const config = {
-      url: "http://localhost:4000/project/names",
+      url: `${process.env.REACT_APP_BACKEND_URL}/project/names`,
       method: "get",
     };
     try {

@@ -117,8 +117,8 @@ const LineChart = ({ year }) => {
   };
 
   const getData = async () => {
-    const url1 = "http://localhost:4000/payment/get";
-    const url2 = "http://localhost:4000/expense/all";
+    const url1 = `${process.env.REACT_APP_BACKEND_URL}/payment/get`;
+    const url2 = `${process.env.REACT_APP_BACKEND_URL}/expense/all`;
     const config = {
       params: {
         year: year,

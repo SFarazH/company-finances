@@ -15,7 +15,7 @@ const DonutChart = () => {
   });
   const getExpenseData = async () => {
     const config = {
-      url: "http://localhost:4000/expense/all",
+      url: `${process.env.REACT_APP_BACKEND_URL}/expense/all`,
       method: "get",
     };
     axios(config)

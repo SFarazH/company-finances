@@ -19,7 +19,7 @@ export default function Companies() {
       },
     };
     axios
-      .get("http://localhost:4000/client/get", config)
+      .get(`${process.env.REACT_APP_BACKEND_URL}/client/get`, config)
       .then((res) => setClients(res.data))
       .catch((e) => console.error(e));
   }, [temp]);
@@ -56,7 +56,7 @@ export default function Companies() {
                 element={
                   <>
                     {isForm ? (
-                      <CompanyForm  setIsForm={setIsForm} setTemp={setTemp} />
+                      <CompanyForm setIsForm={setIsForm} setTemp={setTemp} />
                     ) : (
                       <>
                         {clientName.map((client) => (

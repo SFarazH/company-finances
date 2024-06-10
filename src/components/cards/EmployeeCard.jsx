@@ -11,7 +11,7 @@ const EmployeeCard = () => {
   const [empData, setEmpData] = useState({});
   const getEmployeeData = async (id) => {
     const config = {
-      url: "http://localhost:4000/employee/get",
+      url: `${process.env.REACT_APP_BACKEND_URL}/employee/get`,
       method: "get",
       params: {
         empId: id,

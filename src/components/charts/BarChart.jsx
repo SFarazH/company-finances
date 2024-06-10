@@ -57,7 +57,7 @@ const BarGraph = ({ year }) => {
         },
       };
       axios
-        .get("http://localhost:4000/project/all", config)
+        .get(`${process.env.REACT_APP_BACKEND_URL}/project/all`, config)
         .then((res) => setProjectsByMonth(getOrdersByMonth(res.data)))
         .catch((e) => console.error("Error fetching data:", e));
     };

@@ -22,7 +22,7 @@ const PaymentForm = ({ setIsForm, setTemp }) => {
 
   const getProjectsName = async () => {
     const config = {
-      url: "http://localhost:4000/project/names",
+      url: `${process.env.REACT_APP_BACKEND_URL}/project/names`,
       method: "get",
       params: {
         liability: true,
@@ -42,7 +42,7 @@ const PaymentForm = ({ setIsForm, setTemp }) => {
 
   const addPayment = async (data) => {
     const config = {
-      url: "http://localhost:4000/payment/add",
+      url: `${process.env.REACT_APP_BACKEND_URL}/payment/add`,
       method: "post",
       data: data,
     };

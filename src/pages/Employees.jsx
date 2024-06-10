@@ -12,7 +12,7 @@ const Employees = () => {
   const [temp, setTemp] = useState(0);
   const getEmployeeNames = async () => {
     const config = {
-      url: "http://localhost:4000/employee/get",
+      url: `${process.env.REACT_APP_BACKEND_URL}/employee/get`,
       method: "get",
     };
     axios(config)

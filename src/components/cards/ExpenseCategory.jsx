@@ -26,7 +26,7 @@ const ExpenseCategory = () => {
 
   const getExpenses = async () => {
     const config = {
-      url: "http://localhost:4000/expense/get",
+      url: `${process.env.REACT_APP_BACKEND_URL}/expense/get`,
       method: "get",
       params: {
         expenseCategory: expenseCategory,
