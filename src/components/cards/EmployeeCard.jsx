@@ -44,6 +44,12 @@ const EmployeeCard = () => {
                     AADHAR :{" "}
                     <span className="font-semibold">{empData.aadharCard}</span>
                   </p>
+                  {empData.panCard && (
+                    <p className="text-md">
+                      PAN :{" "}
+                      <span className="font-semibold">{empData.panCard}</span>
+                    </p>
+                  )}
                   <p className="text-md">
                     Joining Date :{" "}
                     <span className="font-semibold text-blue-800">

@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 
-const EmployeeForm = () => {
+const EmployeeForm = ({ setTemp, setIsForm }) => {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
@@ -18,6 +18,10 @@ const EmployeeForm = () => {
         // console.log(res);
         setError(false);
         setSuccess(true);
+        setTimeout(() => {
+          setIsForm(false);
+          setTemp((prev) => prev + 1);
+        }, 1500);
       })
       .catch((e) => {
         setErrorMsg(e.response.data.error);

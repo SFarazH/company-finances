@@ -9,6 +9,7 @@ import EmployeeForm from "../components/forms/EmployeeForm";
 const Employees = () => {
   const [employees, setEmployees] = useState([]);
   const [isForm, setIsForm] = useState(false);
+  const [temp, setTemp] = useState(0);
   const getEmployeeNames = async () => {
     const config = {
       url: "http://localhost:4000/employee/get",
@@ -21,7 +22,7 @@ const Employees = () => {
 
   useEffect(() => {
     getEmployeeNames();
-  }, []);
+  }, [temp]);
 
   return (
     <Spinner
@@ -53,7 +54,7 @@ const Employees = () => {
                 path="/"
                 element={
                   isForm ? (
-                    <EmployeeForm />
+                    <EmployeeForm setIsForm={setIsForm} setTemp={setTemp} />
                   ) : (
                     <>
                       {employees.map((emp) => (
