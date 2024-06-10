@@ -58,7 +58,15 @@ const EmployeeCard = () => {
                   </p>
                 </div>
                 <div className="bg-gray-100 rounded-lg w-1/3 p-2">
-                  <p className="font-semibold text-md">Salaries</p>
+                  <p className="font-semibold text-md mb-3">Salaries</p>
+                  {empData.salaries?.map((salary) => {
+                    return (
+                      <div className="flex justify-between items-center my-1">
+                        <p>{formatDate(salary.date)}</p>
+                        <p>{salary.amount}</p>
+                      </div>
+                    );
+                  })}
                 </div>
                 <div>
                   <p className="text-md font-semibold mb-2">

@@ -15,10 +15,14 @@ const EmployeeForm = () => {
     };
     axios(config)
       .then((res) => {
-        console.log(res);
+        // console.log(res);
+        setError(false);
         setSuccess(true);
       })
-      .catch((e) => console.log(e));
+      .catch((e) => {
+        setErrorMsg(e.response.data.error);
+        setError(true);
+      });
   };
   const {
     register,
@@ -26,7 +30,7 @@ const EmployeeForm = () => {
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
-    data.aadhar = parseFloat(data.aadhar);
+    // data.aadhar = parseFloat(data.aadhar);
     addEmployee(data);
     console.log(data);
   };
