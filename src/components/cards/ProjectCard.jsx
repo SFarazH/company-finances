@@ -132,7 +132,7 @@ export default function ProjectCard({ setTemp }) {
                       Project Manager : {data.projectManager}
                     </p>
 
-                    {data.projectConsultant && (
+                    {data.projectConsultant.name && (
                       <p className="my-4">
                         Project Consultant : {data.projectConsultant.name}
                       </p>
