@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "../assets/main_logo.png";
+// import logo from "../assets/main_logo.png";
 import sideMenu from "../assets/sidebar.json";
 import { Link, useLocation } from "react-router-dom";
 
@@ -9,7 +9,7 @@ export default function SideMenu() {
   return (
     <>
       <div className="h-screen sticky top-0 bg-[#003262]">
-        <img src={logo} alt="" className="mx-auto py-4" />
+        <p className="mx-4 p-4 italic text-white font-semibold text-2xl">XYZ Technologies</p>
         <div className="grid grid-flow-row gap-4 mt-4">
           {sideMenu.map((item) => {
             const isActive = loc.pathname === item.link;
