@@ -40,7 +40,7 @@ export default function Payments() {
         <div className="px-8">
           <div className="flex justify-between items-center">
             <p className="text-3xl font-semibold my-4">Payments</p>
-            {isForm ? (
+            {/* {isForm ? (
               <IoCloseCircle
                 onClick={() => setIsForm(false)}
                 size={40}
@@ -56,28 +56,29 @@ export default function Payments() {
                 color="green"
                 className="cursor-pointer"
               />
-            )}
+            )} */}
           </div>
-          {isForm ? (
+          {/* {isForm ? (
             <PaymentForm setIsForm={setIsForm} setTemp={setTemp} />
           ) : (
-            <>
-              <SetQuery
-                setQueryParams={setQueryParams}
-                setTemp={setTemp}
-                isProject
-              />
-              <div className="mt-8">
-                {paymentData && paymentData.length > 0 ? (
-                  paymentData.map((payment) => <PaymentCard {...payment} />)
-                ) : (
-                  <p className="text-lg text-red-500 font-semibold text-center mt-4">
-                    No payments found!
-                  </p>
-                )}
-              </div>
-            </>
-          )}
+            
+          )} */}
+          <>
+            <SetQuery
+              setQueryParams={setQueryParams}
+              setTemp={setTemp}
+              isProject
+            />
+            <div className="mt-8">
+              {paymentData && paymentData.length > 0 ? (
+                paymentData.map((payment) => <PaymentCard {...payment} />)
+              ) : (
+                <p className="text-lg text-red-500 font-semibold text-center mt-4">
+                  No payments found!
+                </p>
+              )}
+            </div>
+          </>
         </div>
       }
     />

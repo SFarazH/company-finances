@@ -31,7 +31,7 @@ export default function Companies() {
           <div className="px-8">
             <div className="flex justify-between items-center">
               <p className="text-3xl font-semibold my-4 ">Clients</p>
-              {isForm ? (
+              {/* {isForm ? (
                 <IoIosCloseCircle
                   color="red"
                   size={45}
@@ -48,28 +48,29 @@ export default function Companies() {
                     navigate("/clients");
                   }}
                 />
-              )}
+              )} */}
             </div>
             <Routes>
               <Route
                 path="/"
                 element={
                   <>
-                    {isForm ? (
+                    {/* {isForm ? (
                       <CompanyForm setIsForm={setIsForm} setTemp={setTemp} />
                     ) : (
-                      <>
-                        {clientName.map((client) => (
-                          <Link key={client._id} to={`/clients/${client._id}`}>
-                            <div key={client._id} className="my-2">
-                              <div className="border p-3 rounded-full text-xl cursor-pointer flex justify-between">
-                                {client.companyName}
-                              </div>
+                      
+                    )} */}
+                    <>
+                      {clientName.map((client) => (
+                        <Link key={client._id} to={`/clients/${client._id}`}>
+                          <div key={client._id} className="my-2">
+                            <div className="border p-3 rounded-full text-xl cursor-pointer flex justify-between">
+                              {client.companyName}
                             </div>
-                          </Link>
-                        ))}
-                      </>
-                    )}
+                          </div>
+                        </Link>
+                      ))}
+                    </>
                   </>
                 }
               ></Route>

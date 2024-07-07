@@ -51,7 +51,7 @@ export default function Purchases() {
         <div className="px-8">
           <div className="flex justify-between items-center">
             <p className="text-3xl font-semibold my-4">Purchases</p>
-            {isForm ? (
+            {/* {isForm ? (
               <IoCloseCircle
                 onClick={() => setIsForm(false)}
                 size={40}
@@ -67,50 +67,51 @@ export default function Purchases() {
                 color="green"
                 className="cursor-pointer"
               />
-            )}
+            )} */}
           </div>
           <Routes>
             <Route
               path="/"
               element={
                 <div>
-                  {isForm ? (
+                  {/* {isForm ? (
                     <PurchaseForm setIsForm={setIsForm} />
                   ) : (
-                    <>
-                      <SetQuery
-                        setQueryParams={setQueryParams}
-                        setTemp={setTemp}
-                      />
-                      {purchases && purchases.length > 0 ? (
-                        purchases.map((purchase) => (
-                          <Link to={`/purchases/${purchase._id}`}>
-                            <div className="rounded-xl border p-4 py-2 border-gray-900 my-4 flex items-center text-lg justify-between">
-                              <div>
-                                <p className="rounded-full bg-indigo-900 text-white w-fit p-1.5 px-2">
-                                  {formatDate(purchase.purchaseDate)}
-                                </p>
-                                <p className="text-xl mt-2 font-semibold ">
-                                  {purchase.productName} -{" "}
-                                  <span className="text-base">
-                                    ({purchase.projectName})
-                                  </span>
-                                </p>
-                              </div>
-
-                              <p className="text-lg font-semibold bg-green-600 p-2 m-2 w-fit rounded-full text-white flex items-center gap-1">
-                                <FaRupeeSign /> {purchase.finalPriceProduct}
+                    
+                  )} */}
+                  <>
+                    <SetQuery
+                      setQueryParams={setQueryParams}
+                      setTemp={setTemp}
+                    />
+                    {purchases && purchases.length > 0 ? (
+                      purchases.map((purchase) => (
+                        <Link to={`/purchases/${purchase._id}`}>
+                          <div className="rounded-xl border p-4 py-2 border-gray-900 my-4 flex items-center text-lg justify-between">
+                            <div>
+                              <p className="rounded-full bg-indigo-900 text-white w-fit p-1.5 px-2">
+                                {formatDate(purchase.purchaseDate)}
+                              </p>
+                              <p className="text-xl mt-2 font-semibold ">
+                                {purchase.productName} -{" "}
+                                <span className="text-base">
+                                  ({purchase.projectName})
+                                </span>
                               </p>
                             </div>
-                          </Link>
-                        ))
-                      ) : (
-                        <p className="text-lg text-red-500 font-semibold text-center mt-4">
-                          No purchases found!
-                        </p>
-                      )}
-                    </>
-                  )}
+
+                            <p className="text-lg font-semibold bg-green-600 p-2 m-2 w-fit rounded-full text-white flex items-center gap-1">
+                              <FaRupeeSign /> {purchase.finalPriceProduct}
+                            </p>
+                          </div>
+                        </Link>
+                      ))
+                    ) : (
+                      <p className="text-lg text-red-500 font-semibold text-center mt-4">
+                        No purchases found!
+                      </p>
+                    )}
+                  </>
                 </div>
               }
             ></Route>

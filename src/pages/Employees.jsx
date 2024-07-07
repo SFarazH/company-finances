@@ -31,7 +31,7 @@ const Employees = () => {
           <div className="px-8">
             <div className="flex justify-between items-center mb-2">
               <p className="text-3xl font-semibold my-4">Employees</p>
-              {isForm ? (
+              {/* {isForm ? (
                 <IoCloseCircle
                   onClick={() => setIsForm(false)}
                   size={40}
@@ -47,28 +47,28 @@ const Employees = () => {
                   color="green"
                   className="cursor-pointer"
                 />
-              )}
+              )} */}
             </div>
             <Routes>
               <Route
                 path="/"
                 element={
-                  isForm ? (
-                    <EmployeeForm setIsForm={setIsForm} setTemp={setTemp} />
-                  ) : (
-                    <>
-                      {employees.map((emp) => (
-                        <Link to={`/employees/${emp._id}`}>
-                          <div
-                            key={emp._id}
-                            className="text-xl text-semibold border p-2 rounded-lg my-2"
-                          >
-                            <p>{emp.name}</p>
-                          </div>
-                        </Link>
-                      ))}
-                    </>
-                  )
+                  //   isForm ? (
+                  //     <EmployeeForm setIsForm={setIsForm} setTemp={setTemp} />
+                  //   ) : (
+                  //   )
+                  <>
+                    {employees.map((emp) => (
+                      <Link to={`/employees/${emp._id}`}>
+                        <div
+                          key={emp._id}
+                          className="text-xl text-semibold border p-2 rounded-lg my-2"
+                        >
+                          <p>{emp.name}</p>
+                        </div>
+                      </Link>
+                    ))}
+                  </>
                 }
               ></Route>
               <Route path=":empId" element={<EmployeeCard />}></Route>

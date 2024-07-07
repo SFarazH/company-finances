@@ -60,7 +60,7 @@ export default function Projects() {
         <div className="px-8">
           <div className="flex justify-between items-center">
             <p className="text-3xl font-semibold my-4 mb-6">Projects</p>
-            {isForm ? (
+            {/* {isForm ? (
               <IoIosCloseCircle
                 color="red"
                 size={45}
@@ -77,29 +77,27 @@ export default function Projects() {
                   navigate("/projects");
                 }}
               />
-            )}
+            )} */}
           </div>
           <Routes>
             <Route
               path="/"
               element={
-                isForm ? (
-                  <ProjectForm setTemp={setTemp} setIsForm={setIsForm} />
-                ) : (
-                  <>
-                    <SetQuery
-                      setQueryParams={setQueryParams}
-                      setTemp={setTemp}
-                    />
-                    <div>
-                      {sortedArray.map((project) => (
-                        <Link key={project._id} to={`/projects/${project._id}`}>
-                          <ProjectNames {...project} />
-                        </Link>
-                      ))}
-                    </div>
-                  </>
-                )
+                // isForm ? (
+                //   <ProjectForm setTemp={setTemp} setIsForm={setIsForm} />
+                // ) : (
+
+                // )
+                <>
+                  <SetQuery setQueryParams={setQueryParams} setTemp={setTemp} />
+                  <div>
+                    {sortedArray.map((project) => (
+                      <Link key={project._id} to={`/projects/${project._id}`}>
+                        <ProjectNames {...project} />
+                      </Link>
+                    ))}
+                  </div>
+                </>
               }
             />
             <Route
